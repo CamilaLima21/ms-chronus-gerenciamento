@@ -18,9 +18,9 @@ public class Consulta {
     private Integer idProfissionalSaude;
     private LocalDate dataHoraConsulta;
     private String observacaoConsulta;
-    private EnumStatusConsulta statusConsulta; // Ex: "Pendente", "Confirmada", "Cancelada"
-    private EnumTipoConsulta tipoConsulta; // Ex: "Presencial", "Telemedicina"
-    private String motivoCancelamento; // Opcional, usado se a consulta for cancelada
+    private EnumStatusConsulta statusConsulta;
+    private EnumTipoConsulta tipoConsulta;
+    private String motivoCancelamento;
 
     public static Consulta createConsulta(
             final Integer idPaciente,

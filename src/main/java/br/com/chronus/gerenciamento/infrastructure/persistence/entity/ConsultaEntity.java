@@ -43,14 +43,6 @@ public class ConsultaEntity {
     @Column(name = "tipo_consulta", nullable = false, length = 20, columnDefinition = "varchar(20)")
     private EnumTipoConsulta tipoConsulta;
 
-    /*@Enumerated(EnumType.STRING)
-    @Column(name = "status_consulta")
-    private EnumStatusConsulta statusConsulta;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_consulta")
-    private EnumTipoConsulta tipoConsulta;*/
-
     @Column(name = "motivo_cancelamento")
     private String motivoCancelamento;
 }
