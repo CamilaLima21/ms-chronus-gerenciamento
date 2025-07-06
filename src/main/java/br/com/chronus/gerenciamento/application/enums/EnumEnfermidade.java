@@ -12,5 +12,6 @@ public enum EnumEnfermidade {
     DOENCA_REUMATICA,
     HIV_AIDS,
     HIPERTENSAO_ARTERIAL,
-    OBESIDADE;
+    OBESIDADE,
+    OUTROS;
 }
