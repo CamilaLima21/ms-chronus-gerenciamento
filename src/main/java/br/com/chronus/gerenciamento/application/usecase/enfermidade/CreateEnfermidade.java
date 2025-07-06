@@ -1,6 +1,5 @@
 package br.com.chronus.gerenciamento.application.usecase.enfermidade;
 
-
 import br.com.chronus.gerenciamento.application.domain.Enfermidade;
 import br.com.chronus.gerenciamento.application.gateway.EnfermidadeGateway;
 import br.com.chronus.gerenciamento.application.usecase.enfermidade.exception.EnfermidadeExistenteException;
@@ -18,12 +17,16 @@ public class CreateEnfermidade {
         final var enfermidade = gateway.findEnfermidadeById(request.getIdEnfermidade());
 
         if (enfermidade.isPresent()) {
-            throw new EnfermidadeExistenteException(request.getIdEnfermidade(), request.getNomeEnfermidade());
+            throw new EnfermidadeExistenteException(
+                    request.getIdEnfermidade(),
+                    request.getEnfermidade() != null ? request.getEnfermidade().name() : null
+            );
         }
 
         final var buildDomain =
                 Enfermidade.createEnfermidade(
-                        request.getNomeEnfermidade(),
+                        request.getEnfermidade(),
+                        request.getDescricaoEnfermidade(),
                         request.getCid());
 
         return gateway.save(buildDomain);

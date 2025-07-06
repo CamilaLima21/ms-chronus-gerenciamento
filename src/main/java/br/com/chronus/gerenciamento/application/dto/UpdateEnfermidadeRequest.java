@@ -1,8 +1,7 @@
 package br.com.chronus.gerenciamento.application.dto;
 
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +10,12 @@ import lombok.Setter;
 @Setter
 public class UpdateEnfermidadeRequest {
 
-    @NotBlank(message = "Name is required")
-    @Size(max = 100, message = "Name length must be less than 100 characters")
-    @Pattern(regexp = "[a-zA-Z\\s]+", message = "Name must contain only letters and spaces")
-    private String nomeEnfermidade;
+    @NotNull(message = "O tipo de enfermidade é obrigatório")
+    private EnumEnfermidade enfermidade;
+
+    @Size(max = 100, message = "A descrição deve ter no máximo 100 caracteres")
+    private String descricaoEnfermidade;
+
+    @Size(max = 20, message = "O CID deve ter no máximo 20 caracteres")
     private String cid;
 }
