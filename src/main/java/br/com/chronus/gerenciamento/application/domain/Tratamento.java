@@ -42,7 +42,8 @@ public class Tratamento {
             final LocalDate inicioTratamento,
             final LocalDate fimTratamento,
             final String periodicidade,
+            final String dosagem,
             final List<HorarioEnum> horarios) {
-        return new Tratamento(null, medicamento, inicioTratamento, fimTratamento, periodicidade, horarios);
+        return new Tratamento(null, medicamento, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
     }
 }
