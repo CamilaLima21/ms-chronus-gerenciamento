@@ -1,0 +1,16 @@
+package br.com.chronus.gerenciamento.application.enums;
+
+public enum EnumEnfermidade {
+    ASMA,
+    CANCERES,
+    COLESTEROL_ALTO,
+    DIABETES,
+    DOENCA_CARDIO_VASCULAR,
+    DOENCA_HEPATICA_CRONICA,
+    DOENCA_PULMONAR_OBSTRUTIVA_CRONICA,
+    DOENCA_RENAL_CRONICA,
+    DOENCA_REUMATICA,
+    HIV_AIDS,
+    HIPERTENSAO_ARTERIAL,
+    OBESIDADE;
+}

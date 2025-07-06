@@ -1,6 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.gateway;
 
 import br.com.chronus.gerenciamento.application.domain.Enfermidade;
+import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
 import br.com.chronus.gerenciamento.application.gateway.EnfermidadeGateway;
 import br.com.chronus.gerenciamento.infrastructure.persistence.entity.EnfermidadeEntity;
 import br.com.chronus.gerenciamento.infrastructure.persistence.repository.EnfermidadeRepository;
@@ -59,10 +60,23 @@ public class EnfermidadeGatewayImpl implements EnfermidadeGateway {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<Enfermidade> findEnfermidadeByCid(final String cid) {
+        return enfermidadeRepository.findByCid(cid)
+                .map(this::mapToDomain);
+    }
+
+    @Override
+    public Optional<Enfermidade> findEnfermidadeByEnumEnfermidade(final EnumEnfermidade enfermidade) {
+        return enfermidadeRepository.findByEnfermidade(enfermidade)
+                .map(this::mapToDomain);
+    }
+
     private EnfermidadeEntity mapToEntity(final Enfermidade enfermidade) {
         return EnfermidadeEntity.builder()
                 .idEnfermidade(enfermidade.getIdEnfermidade())
-                .nomeEnfermidade(enfermidade.getNomeEnfermidade())
+                .enfermidade(enfermidade.getEnfermidade())
+                .descricaoEnfermidade(enfermidade.getDescricaoEnfermidade())
                 .cid(enfermidade.getCid())
                 .build();
     }
@@ -70,7 +84,8 @@ public class EnfermidadeGatewayImpl implements EnfermidadeGateway {
     private Enfermidade mapToDomain(final EnfermidadeEntity entity) {
         return Enfermidade.builder()
                 .idEnfermidade(entity.getIdEnfermidade())
-                .nomeEnfermidade(entity.getNomeEnfermidade())
+                .enfermidade(entity.getEnfermidade())
+                .descricaoEnfermidade(entity.getDescricaoEnfermidade())
                 .cid(entity.getCid())
                 .build();
     }

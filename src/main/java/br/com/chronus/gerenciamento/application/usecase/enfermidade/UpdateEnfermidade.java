@@ -15,11 +15,12 @@ public class UpdateEnfermidade {
 
     public Enfermidade execute(final int idEnfermidade, final UpdateEnfermidadeRequest updateEnfermidadeRequest) {
         final var enfermidadeFound =
-            gateway
-                .findEnfermidadeById(idEnfermidade)
-                .orElseThrow(() -> new EnfermidadeNaoEncontradaException(idEnfermidade));
+                gateway
+                        .findEnfermidadeById(idEnfermidade)
+                        .orElseThrow(() -> new EnfermidadeNaoEncontradaException(idEnfermidade));
 
-        enfermidadeFound.setNomeEnfermidade(updateEnfermidadeRequest.getNomeEnfermidade());
+        enfermidadeFound.setEnfermidade(updateEnfermidadeRequest.getEnfermidade());
+        enfermidadeFound.setDescricaoEnfermidade(updateEnfermidadeRequest.getDescricaoEnfermidade());
         enfermidadeFound.setCid(updateEnfermidadeRequest.getCid());
 
         return gateway.update(enfermidadeFound);

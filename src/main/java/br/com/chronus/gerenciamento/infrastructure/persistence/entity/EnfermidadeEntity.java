@@ -1,8 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.persistence.entity;
 
+import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -19,10 +18,12 @@ public class EnfermidadeEntity {
     @Column(name = "id_enfermidade")
     private Integer idEnfermidade;
 
-    @Size(max = 100, message = "Name length must be less than 100 characters")
-    @Pattern(regexp = "[a-zA-Z\\s]+", message = "Name must contain only letters and spaces")
-    @Column(name = "nome_enfermidade", length = 100, nullable = false)
-    private String nomeEnfermidade;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "enfermidade", length = 50, nullable = false)
+    private EnumEnfermidade enfermidade;
+
+    @Column(name = "descricao_enfermidade", length = 100)
+    private String descricaoEnfermidade;
 
     @Column(name = "cid", length = 20)
     private String cid;
