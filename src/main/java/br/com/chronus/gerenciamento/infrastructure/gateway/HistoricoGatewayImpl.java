@@ -49,10 +49,14 @@ public class HistoricoGatewayImpl implements HistoricoGateway {
         HistoricoEntity entity = new HistoricoEntity();
         entity.setId(historico.getId() != null ? historico.getId().longValue() : null);
         entity.setIdPaciente(historico.getIdPaciente());
+        entity.setEnfermidades(historico.getEnfermidades());
+        entity.setMedicamentos(historico.getMedicamentos());
+        entity.setTratamento(historico.getTratamento());
+        entity.setConsulta(historico.getConsulta());
+        entity.setIdCheckup(historico.getIdCheckup());
         entity.setObservacoes(historico.getObservacoes());
         entity.setDataInicio(historico.getDataInicio());
         entity.setDataFim(historico.getDataFim());
-        entity.setIdCheckup(historico.getIdCheckup());
         return entity;
     }
 

@@ -18,10 +18,10 @@ public class Historico {
 
     private Integer id;
     private Integer idPaciente;
-    private List<Enfermidade> enfermidades;
-    private List<Medicacao> medicamentos;
-    private Tratamento tratamento;
-    private Consulta consulta;
+    private Integer enfermidades;
+    private Integer medicamentos;
+    private Integer tratamento;
+    private Integer consulta;
     private Integer idCheckup;
     private String observacoes;
     private LocalDate dataInicio;
