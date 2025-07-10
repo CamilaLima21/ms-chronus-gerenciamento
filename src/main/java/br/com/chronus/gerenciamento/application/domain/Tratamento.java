@@ -38,12 +38,12 @@ public class Tratamento {
     private List<HorarioEnum> horarios;
 
     public static Tratamento createTratamento(
-            final String medicamento,
+            final String idMedicamento,
             final LocalDate inicioTratamento,
             final LocalDate fimTratamento,
             final String periodicidade,
             final String dosagem,
             final List<HorarioEnum> horarios) {
-        return new Tratamento(null, medicamento, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
+        return new Tratamento(null, idMedicamento, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
     }
 }
