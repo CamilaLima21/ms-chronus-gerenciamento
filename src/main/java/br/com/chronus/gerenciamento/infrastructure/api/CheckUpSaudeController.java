@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.CheckUpSaude;
-import br.com.chronus.gerenciamento.application.dto.CheckUpSaudeRequest;
+import br.com.chronus.gerenciamento.application.dto.checkup.CheckUpSaudeRequest;
 import br.com.chronus.gerenciamento.application.gateway.CheckUpSaudeGateway;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

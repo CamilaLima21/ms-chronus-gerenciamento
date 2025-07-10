@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.application.usecase.medicacao;
 
 import br.com.chronus.gerenciamento.application.domain.Medicacao;
-import br.com.chronus.gerenciamento.application.dto.UpdateMedicacaoRequest;
+import br.com.chronus.gerenciamento.application.dto.medicacao.UpdateMedicacaoRequest;
 import br.com.chronus.gerenciamento.application.gateway.MedicacaoGateway;
 import br.com.chronus.gerenciamento.application.usecase.medicacao.exception.MedicacaoNaoEncontradaException;
 import lombok.RequiredArgsConstructor;

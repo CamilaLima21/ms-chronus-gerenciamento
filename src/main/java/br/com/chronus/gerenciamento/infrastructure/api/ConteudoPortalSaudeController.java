@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.ConteudoPortalSaude;
-import br.com.chronus.gerenciamento.application.dto.UpdateConteudoPortalSaudeRequest;
+import br.com.chronus.gerenciamento.application.dto.portal.UpdateConteudoPortalSaudeRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumFiltroPortalSaude;
 import br.com.chronus.gerenciamento.application.gateway.ConteudoPortalSaudeGateway;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Enfermidade;
-import br.com.chronus.gerenciamento.application.dto.UpdateEnfermidadeRequest;
+import br.com.chronus.gerenciamento.application.dto.enfermidades.UpdateEnfermidadeRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
 import br.com.chronus.gerenciamento.application.gateway.EnfermidadeGateway;
 import lombok.RequiredArgsConstructor;

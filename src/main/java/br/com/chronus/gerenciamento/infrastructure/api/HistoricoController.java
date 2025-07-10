@@ -1,14 +1,19 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Historico;
+import br.com.chronus.gerenciamento.application.dto.historico.CreateHistoricoRequestDto;
+import br.com.chronus.gerenciamento.application.mapper.HistoricoMapper;
 import br.com.chronus.gerenciamento.application.usecase.historico.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/historicos")
+@RequestMapping("chronus/historicos")
+@RequiredArgsConstructor
 public class HistoricoController {
 
     private final SalvarHistoricoUseCase salvarHistoricoUseCase;
@@ -16,20 +21,11 @@ public class HistoricoController {
     private final ListarHistoricoPorPacienteUseCase listarHistoricoPorPacienteUseCase;
     private final DeletarHistoricoPorIdUseCase deletarHistoricoPorIdUseCase;
 
-    public HistoricoController(
-            SalvarHistoricoUseCase salvarHistoricoUseCase,
-            BuscarHistoricoPorIdUseCase buscarHistoricoPorIdUseCase,
-            ListarHistoricoPorPacienteUseCase listarHistoricoPorPacienteUseCase,
-            DeletarHistoricoPorIdUseCase deletarHistoricoPorIdUseCase) {
-        this.salvarHistoricoUseCase = salvarHistoricoUseCase;
-        this.buscarHistoricoPorIdUseCase = buscarHistoricoPorIdUseCase;
-        this.listarHistoricoPorPacienteUseCase = listarHistoricoPorPacienteUseCase;
-        this.deletarHistoricoPorIdUseCase = deletarHistoricoPorIdUseCase;
-    }
-
     @PostMapping
-    public ResponseEntity<Historico> salvar(@RequestBody Historico historico) {
-        return ResponseEntity.ok(salvarHistoricoUseCase.executar(historico));
+    public ResponseEntity<Historico> salvar(@Validated @RequestBody CreateHistoricoRequestDto createHistoricoRequestDto) {
+        Historico historico = HistoricoMapper.toDomain(createHistoricoRequestDto);
+        Historico created = salvarHistoricoUseCase.executar(historico);
+        return ResponseEntity.ok(salvarHistoricoUseCase.executar(created));
     }
 
     @GetMapping("/{id}")

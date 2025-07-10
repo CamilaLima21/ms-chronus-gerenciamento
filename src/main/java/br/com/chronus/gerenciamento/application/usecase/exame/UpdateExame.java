@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.application.usecase.exame;
 
 import br.com.chronus.gerenciamento.application.domain.Exame;
-import br.com.chronus.gerenciamento.application.dto.UpdateExameRequest;
+import br.com.chronus.gerenciamento.application.dto.exame.UpdateExameRequest;
 import br.com.chronus.gerenciamento.application.gateway.ExameGateway;
 import br.com.chronus.gerenciamento.application.usecase.exame.exception.ExameNaoEncontradoException;
 import lombok.RequiredArgsConstructor;

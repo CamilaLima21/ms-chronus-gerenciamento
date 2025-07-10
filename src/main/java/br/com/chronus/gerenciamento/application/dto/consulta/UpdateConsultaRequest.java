@@ -1,4 +1,4 @@
-package br.com.chronus.gerenciamento.application.dto;
+package br.com.chronus.gerenciamento.application.dto.consulta;
 
 import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;

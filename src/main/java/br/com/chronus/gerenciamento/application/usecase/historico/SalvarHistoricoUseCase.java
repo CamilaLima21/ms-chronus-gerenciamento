@@ -1,6 +1,7 @@
 package br.com.chronus.gerenciamento.application.usecase.historico;
 
 import br.com.chronus.gerenciamento.application.domain.Historico;
+import br.com.chronus.gerenciamento.application.dto.historico.CreateHistoricoRequestDto;
 import br.com.chronus.gerenciamento.application.gateway.HistoricoGateway;
 import org.springframework.stereotype.Component;
 

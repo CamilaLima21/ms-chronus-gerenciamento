@@ -1,4 +1,4 @@
-package br.com.chronus.gerenciamento.application.dto;
+package br.com.chronus.gerenciamento.application.dto.enfermidades;
 
 import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
 import jakarta.validation.constraints.NotNull;

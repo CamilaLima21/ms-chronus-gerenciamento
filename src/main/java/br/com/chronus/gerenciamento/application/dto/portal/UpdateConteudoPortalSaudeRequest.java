@@ -1,4 +1,4 @@
-package br.com.chronus.gerenciamento.application.dto;
+package br.com.chronus.gerenciamento.application.dto.portal;
 
 import br.com.chronus.gerenciamento.application.enums.EnumFiltroPortalSaude;
 import jakarta.validation.constraints.NotNull;

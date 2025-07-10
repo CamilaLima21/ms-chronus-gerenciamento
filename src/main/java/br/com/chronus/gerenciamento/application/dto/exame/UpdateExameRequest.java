@@ -1,4 +1,4 @@
-package br.com.chronus.gerenciamento.application.dto;
+package br.com.chronus.gerenciamento.application.dto.exame;
 
 import br.com.chronus.gerenciamento.application.enums.EnumExame;
 import br.com.chronus.gerenciamento.application.enums.EnumStatusExame;

@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.application.usecase.consulta;
 
 import br.com.chronus.gerenciamento.application.domain.Consulta;
-import br.com.chronus.gerenciamento.application.dto.UpdateConsultaRequest;
+import br.com.chronus.gerenciamento.application.dto.consulta.UpdateConsultaRequest;
 import br.com.chronus.gerenciamento.application.gateway.ConsultaGateway;
 import br.com.chronus.gerenciamento.application.usecase.consulta.exception.ConsultaNaoEncontradaException;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Medicacao;
-import br.com.chronus.gerenciamento.application.dto.UpdateMedicacaoRequest;
+import br.com.chronus.gerenciamento.application.dto.medicacao.UpdateMedicacaoRequest;
 import br.com.chronus.gerenciamento.application.gateway.MedicacaoGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

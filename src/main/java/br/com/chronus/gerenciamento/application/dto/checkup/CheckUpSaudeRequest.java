@@ -1,4 +1,4 @@
-package br.com.chronus.gerenciamento.application.dto;
+package br.com.chronus.gerenciamento.application.dto.checkup;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

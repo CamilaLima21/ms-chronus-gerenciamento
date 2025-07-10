@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Exame;
-import br.com.chronus.gerenciamento.application.dto.UpdateExameRequest;
+import br.com.chronus.gerenciamento.application.dto.exame.UpdateExameRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumExame;
 import br.com.chronus.gerenciamento.application.enums.EnumStatusExame;
 import br.com.chronus.gerenciamento.application.gateway.ExameGateway;
