@@ -1,9 +1,10 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.ConteudoPortalSaude;
-import br.com.chronus.gerenciamento.application.dto.portal.UpdateConteudoPortalSaudeRequest;
+import br.com.chronus.gerenciamento.application.dto.portal.ConteudoPortalSaudeRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumFiltroPortalSaude;
 import br.com.chronus.gerenciamento.application.gateway.ConteudoPortalSaudeGateway;
+import br.com.chronus.gerenciamento.application.mapper.ConteudoPortalSaudeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("chronus/conteudos")
@@ -20,10 +20,11 @@ import java.util.stream.Collectors;
 public class ConteudoPortalSaudeController {
 
     private final ConteudoPortalSaudeGateway conteudoGateway;
+    private final ConteudoPortalSaudeMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ConteudoPortalSaude> createConteudo(@Validated @RequestBody UpdateConteudoPortalSaudeRequest dto) {
-        ConteudoPortalSaude created = conteudoGateway.save(mapToDomain(dto, null));
+    public ResponseEntity<ConteudoPortalSaude> createConteudo(@Validated @RequestBody ConteudoPortalSaudeRequest dto) {
+        ConteudoPortalSaude created = conteudoGateway.save(mapper.toDomain(dto, null));
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -35,8 +36,8 @@ public class ConteudoPortalSaudeController {
     }
 
     @PutMapping("/{idConteudo}")
-    public ResponseEntity<ConteudoPortalSaude> updateConteudo(@PathVariable Integer idConteudo, @Validated @RequestBody UpdateConteudoPortalSaudeRequest dto) {
-        ConteudoPortalSaude updated = conteudoGateway.update(mapToDomain(dto, idConteudo));
+    public ResponseEntity<ConteudoPortalSaude> updateConteudo(@PathVariable Integer idConteudo, @Validated @RequestBody ConteudoPortalSaudeRequest dto) {
+        ConteudoPortalSaude updated = conteudoGateway.update(mapper.toDomain(dto, idConteudo));
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
@@ -58,15 +59,4 @@ public class ConteudoPortalSaudeController {
         return new ResponseEntity<>(conteudos, HttpStatus.OK);
     }
 
-    private ConteudoPortalSaude mapToDomain(UpdateConteudoPortalSaudeRequest dto, Integer id) {
-        return ConteudoPortalSaude.builder()
-                .id(id)
-                .filtroPortalSaude(dto.getFiltroPortalSaude())
-                .conteudos(dto.getConteudos() != null
-                        ? dto.getConteudos().stream()
-                        .map(child -> mapToDomain(child, null))
-                        .collect(Collectors.toList())
-                        : null)
-                .build();
-    }
 }

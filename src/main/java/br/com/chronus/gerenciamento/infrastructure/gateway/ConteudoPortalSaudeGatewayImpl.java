@@ -72,9 +72,7 @@ public class ConteudoPortalSaudeGatewayImpl implements ConteudoPortalSaudeGatewa
         return ConteudoPortalSaudeEntity.builder()
                 .id(domain.getId())
                 .filtroPortalSaude(domain.getFiltroPortalSaude())
-                .conteudos(domain.getConteudos() != null
-                        ? domain.getConteudos().stream().map(this::mapToEntity).collect(Collectors.toList())
-                        : null)
+                .conteudos(domain.getConteudos())
                 .build();
     }
 
@@ -82,9 +80,7 @@ public class ConteudoPortalSaudeGatewayImpl implements ConteudoPortalSaudeGatewa
         return ConteudoPortalSaude.builder()
                 .id(entity.getId())
                 .filtroPortalSaude(entity.getFiltroPortalSaude())
-                .conteudos(entity.getConteudos() != null
-                        ? entity.getConteudos().stream().map(this::mapToDomain).collect(Collectors.toList())
-                        : null)
+                .conteudos(entity.getConteudos())
                 .build();
     }
 }

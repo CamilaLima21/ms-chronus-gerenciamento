@@ -14,12 +14,12 @@ public class ConteudoPortalSaude {
 
     private Integer id;
     private EnumFiltroPortalSaude filtroPortalSaude;
-    private List<ConteudoPortalSaude> conteudos;
+    private List<String> conteudos;
 
     public static ConteudoPortalSaude createConteudoPortalSaude(
-        final Integer id,
+        final Integer idPortalSaude,
         final EnumFiltroPortalSaude filtroPortalSaude,
-        final List<ConteudoPortalSaude> conteudos) {
+        final List<String> conteudos) {
         return new ConteudoPortalSaude(null, filtroPortalSaude, conteudos);
     }
 }

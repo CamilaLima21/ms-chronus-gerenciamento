@@ -24,7 +24,6 @@ public class ConteudoPortalSaudeEntity {
     @Column(name = "filtro_portal_saude", nullable = false)
     private EnumFiltroPortalSaude filtroPortalSaude;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "conteudo_principal_id")
-    private List<ConteudoPortalSaudeEntity> conteudos;
+    @Column(name = "conteudo")
+    private List<String> conteudos;
 }

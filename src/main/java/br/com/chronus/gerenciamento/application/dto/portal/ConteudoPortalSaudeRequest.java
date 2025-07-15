@@ -10,11 +10,11 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UpdateConteudoPortalSaudeRequest {
+public class ConteudoPortalSaudeRequest {
 
     @NotNull(message = "O filtro do portal de saúde é obrigatório")
     private EnumFiltroPortalSaude filtroPortalSaude;
 
     @Size(max = 10, message = "É permitido no máximo 10 conteúdos associados")
-    private List<UpdateConteudoPortalSaudeRequest> conteudos;
+    private List<String> conteudos;
 }

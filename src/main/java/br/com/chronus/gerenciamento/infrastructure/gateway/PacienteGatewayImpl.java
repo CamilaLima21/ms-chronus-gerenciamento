@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.gateway;
 
 import br.com.chronus.gerenciamento.application.gateway.PacienteGateway;
-import br.com.chronus.gerenciamento.infrastructure.integration.PacienteClient;
+import br.com.chronus.gerenciamento.infrastructure.integration.PessoasClient;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PacienteGatewayImpl implements PacienteGateway {
 
-    private final PacienteClient pacienteClient;
+    private final PessoasClient pessoasClient;
 
     @Override
     public boolean verificaPacientePorId(Integer idPaciente) {
         try {
-            pacienteClient.getPacienteById(idPaciente); // 200 = ok
+            pessoasClient.getPacienteById(idPaciente); // 200 = ok
             return true;
         } catch (FeignException.NotFound e) {
             return false;
