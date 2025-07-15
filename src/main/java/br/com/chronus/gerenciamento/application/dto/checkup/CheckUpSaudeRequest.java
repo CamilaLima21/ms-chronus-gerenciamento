@@ -12,7 +12,7 @@ public class CheckUpSaudeRequest {
     @NotNull(message = "O ID do paciente é obrigatório")
     private Integer idPaciente;
 
-    //@NotNull(message = "O ID do profissional de saúde é obrigatório")
+    @NotNull(message = "O ID do profissional de saúde é obrigatório")
     private Integer idProfissionalSaude;
 
     @Size(max = 20, message = "A glicemia deve ter no máximo 20 caracteres")

@@ -3,13 +3,20 @@ package br.com.chronus.gerenciamento.infrastructure.api;
 import br.com.chronus.gerenciamento.application.domain.CheckUpSaude;
 import br.com.chronus.gerenciamento.application.dto.checkup.CheckUpSaudeRequest;
 import br.com.chronus.gerenciamento.application.gateway.CheckUpSaudeGateway;
+import br.com.chronus.gerenciamento.application.mapper.CheckUpMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +26,11 @@ import java.util.Optional;
 public class CheckUpSaudeController {
 
     private final CheckUpSaudeGateway checkUpSaudeGateway;
+    private final CheckUpMapper checkUpMapper;
 
     @PostMapping
     public ResponseEntity<CheckUpSaude> create(@Valid @RequestBody CheckUpSaudeRequest dto) {
-        CheckUpSaude created = checkUpSaudeGateway.save(mapToDomain(dto, null));
+        CheckUpSaude created = checkUpSaudeGateway.save(checkUpMapper.toDomain(dto, null));
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -36,7 +44,7 @@ public class CheckUpSaudeController {
     @PutMapping("/{id}")
     public ResponseEntity<CheckUpSaude> update(@PathVariable Integer id,
                                                @Valid @RequestBody CheckUpSaudeRequest dto) {
-        CheckUpSaude updated = checkUpSaudeGateway.update(mapToDomain(dto, id));
+        CheckUpSaude updated = checkUpSaudeGateway.update(checkUpMapper.toDomain(dto, id));
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
@@ -64,20 +72,4 @@ public class CheckUpSaudeController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    private CheckUpSaude mapToDomain(CheckUpSaudeRequest dto, Integer id) {
-        return CheckUpSaude.builder()
-                .idCheckUpsaude(id)
-                .idPaciente(dto.getIdPaciente())
-                .idProfissionalSaude(dto.getIdProfissionalSaude())
-                .glicemia(dto.getGlicemia())
-                .pressaoArterial(dto.getPressaoArterial())
-                .frequenciaCardiaca(dto.getFrequenciaCardiaca())
-                .frequenciaRespiratoria(dto.getFrequenciaRespiratoria())
-                .temperaturaCorporal(dto.getTemperaturaCorporal())
-                .saturacaoOxigenio(dto.getSaturacaoOxigenio())
-                .outrosDados(dto.getOutrosDados())
-                .observacoes(dto.getObservacoes())
-                .dataHoraRegistro(LocalDateTime.now())
-                .build();
-    }
 }

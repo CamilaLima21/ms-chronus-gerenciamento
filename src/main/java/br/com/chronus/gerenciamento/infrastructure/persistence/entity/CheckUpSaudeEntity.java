@@ -19,15 +19,11 @@ public class CheckUpSaudeEntity {
     @Column(name = "id_checkup_saude")
     private Integer idCheckUpsaude;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_paciente", nullable = false)
+    @Column(name = "id_paciente", nullable = false)
     private Integer idPaciente;
-    //private PacienteEntity paciente;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profissional_saude" /*, nullable = false*/)
+    @Column(name = "id_profissional_saude" , nullable = false)
     private Integer idProfissionalSaude;
-    //private ProfissionalSaudeEntity profissionalSaude;
 
     @Column(name = "glicemia")
     private String glicemia;
