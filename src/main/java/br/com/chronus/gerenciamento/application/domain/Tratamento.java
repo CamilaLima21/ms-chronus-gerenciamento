@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +20,8 @@ public class Tratamento {
 
     private Integer idTratamento;
 
-    private String idMedicamento;
+    @NotNull(message = "Os medicamentos são obrigatórios")
+    private List<Medicacao> medicamentos;
 
     @NotNull(message = "A data de início é obrigatória")
     private LocalDate inicioTratamento;
@@ -38,12 +38,12 @@ public class Tratamento {
     private List<HorarioEnum> horarios;
 
     public static Tratamento createTratamento(
-            final String idMedicamento,
+            final List<Medicacao> medicamentos,
             final LocalDate inicioTratamento,
             final LocalDate fimTratamento,
             final String periodicidade,
             final String dosagem,
             final List<HorarioEnum> horarios) {
-        return new Tratamento(null, idMedicamento, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
+        return new Tratamento(null, medicamentos, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
     }
 }
