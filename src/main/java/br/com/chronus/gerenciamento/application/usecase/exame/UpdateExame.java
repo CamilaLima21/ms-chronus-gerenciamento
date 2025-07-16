@@ -1,7 +1,7 @@
 package br.com.chronus.gerenciamento.application.usecase.exame;
 
 import br.com.chronus.gerenciamento.application.domain.Exame;
-import br.com.chronus.gerenciamento.application.dto.exame.UpdateExameRequest;
+import br.com.chronus.gerenciamento.application.dto.exame.ExameRequest;
 import br.com.chronus.gerenciamento.application.gateway.ExameGateway;
 import br.com.chronus.gerenciamento.application.gateway.PacienteGateway;
 import br.com.chronus.gerenciamento.application.gateway.ProfissionalSaudeGateway;
@@ -19,7 +19,7 @@ public class UpdateExame {
     private final PacienteGateway pacienteGateway;
     private final ProfissionalSaudeGateway profissionalSaudeGateway;
 
-    public Exame execute(final int idExame, final UpdateExameRequest request) {
+    public Exame execute(final int idExame, final ExameRequest request) {
 
         final var exameFound = gateway.findExameById(idExame)
                 .orElseThrow(() -> new ExameNaoEncontradoException(idExame));

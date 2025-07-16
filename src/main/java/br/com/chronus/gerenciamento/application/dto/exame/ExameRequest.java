@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UpdateExameRequest {
+public class ExameRequest {
 
     @NotNull(message = "O paciente é obrigatório")
     private Integer idPaciente;

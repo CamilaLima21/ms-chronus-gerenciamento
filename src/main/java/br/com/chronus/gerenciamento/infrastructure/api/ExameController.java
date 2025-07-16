@@ -1,15 +1,23 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Exame;
-import br.com.chronus.gerenciamento.application.dto.exame.UpdateExameRequest;
+import br.com.chronus.gerenciamento.application.dto.exame.ExameRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumExame;
 import br.com.chronus.gerenciamento.application.enums.EnumStatusExame;
 import br.com.chronus.gerenciamento.application.gateway.ExameGateway;
+import br.com.chronus.gerenciamento.application.mapper.ExameMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +28,11 @@ import java.util.Optional;
 public class ExameController {
 
     private final ExameGateway exameGateway;
+    private final ExameMapper exameMapper;
 
     @PostMapping
-    public ResponseEntity<Exame> createExame(@Validated @RequestBody UpdateExameRequest dto) {
-        Exame created = exameGateway.save(mapToDomain(dto, null));
+    public ResponseEntity<Exame> createExame(@Validated @RequestBody ExameRequest dto) {
+        Exame created = exameGateway.save(exameMapper.toDomain(dto, null));
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -35,8 +44,8 @@ public class ExameController {
     }
 
     @PutMapping("/{idExame}")
-    public ResponseEntity<Exame> updateExame(@PathVariable Integer idExame, @Validated @RequestBody UpdateExameRequest dto) {
-        Exame updated = exameGateway.update(mapToDomain(dto, idExame));
+    public ResponseEntity<Exame> updateExame(@PathVariable Integer idExame, @Validated @RequestBody ExameRequest dto) {
+        Exame updated = exameGateway.update(exameMapper.toDomain(dto, idExame));
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
@@ -76,14 +85,4 @@ public class ExameController {
         return new ResponseEntity<>(exames, HttpStatus.OK);
     }
 
-    private Exame mapToDomain(UpdateExameRequest dto, Integer id) {
-        return Exame.builder()
-                .idExame(id)
-                .idPaciente(dto.getIdPaciente())
-                .idProfissionalSaude(dto.getIdProfissionalSaude())
-                .dataExame(dto.getDataExame())
-                .listaExames(dto.getListaExames())
-                .statusExame(dto.getStatusExame())
-                .build();
-    }
 }

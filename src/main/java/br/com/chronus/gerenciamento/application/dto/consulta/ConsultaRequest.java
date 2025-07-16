@@ -9,10 +9,13 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class UpdateConsultaRequest {
-
+public class ConsultaRequest {
+    private Integer idConsulta;
+    private Integer idPaciente;
     private Integer idProfissionalSaude;
     private LocalDate dataHoraConsulta;
+    private String observacaoConsulta;
     private EnumStatusConsulta statusConsulta;
     private EnumTipoConsulta tipoConsulta;
+    private String motivoCancelamento;
 }

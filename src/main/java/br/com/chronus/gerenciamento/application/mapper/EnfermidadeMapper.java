@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EnfermidadeMapper {
 
-    public static Enfermidade mapToDomain(EnfermidadeRequest dto, Integer id) {
+    public Enfermidade mapToDomain(EnfermidadeRequest dto, Integer id) {
         return Enfermidade.builder()
                 .idEnfermidade(id)
                 .enfermidade(dto.getEnfermidade())
