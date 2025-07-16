@@ -3,6 +3,7 @@ package br.com.chronus.gerenciamento.infrastructure.api;
 import br.com.chronus.gerenciamento.application.domain.Medicacao;
 import br.com.chronus.gerenciamento.application.dto.medicacao.UpdateMedicacaoRequest;
 import br.com.chronus.gerenciamento.application.gateway.MedicacaoGateway;
+import br.com.chronus.gerenciamento.application.mapper.MedicacaoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,11 @@ import java.util.Optional;
 public class MedicacaoController {
 
     private final MedicacaoGateway medicacaoGateway;
+    private final MedicacaoMapper medicacaoMapper;
 
     @PostMapping
     public ResponseEntity<Medicacao> createMedicacao(@Validated @RequestBody UpdateMedicacaoRequest dto) {
-        Medicacao created = medicacaoGateway.save(mapToDomain(dto, null));
+        Medicacao created = medicacaoGateway.save(medicacaoMapper.toDomain(dto, null));
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -34,7 +36,7 @@ public class MedicacaoController {
 
     @PutMapping("/{idMedicacao}")
     public ResponseEntity<Medicacao> updateMedicacao(@PathVariable Integer idMedicacao, @Validated @RequestBody UpdateMedicacaoRequest dto) {
-        Medicacao updated = medicacaoGateway.update(mapToDomain(dto, idMedicacao));
+        Medicacao updated = medicacaoGateway.update(medicacaoMapper.toDomain(dto, idMedicacao));
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
@@ -64,12 +66,4 @@ public class MedicacaoController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    private Medicacao mapToDomain(UpdateMedicacaoRequest dto, Integer id) {
-        return Medicacao.builder()
-                .idMedicacao(id)
-                .nomeMedicacao(dto.getNomeMedicacao())
-                .descricaoMedicacao(dto.getDescricaoMedicacao())
-                .sigtapMedicacao(dto.getSigtapMedicacao())
-                .build();
-    }
 }

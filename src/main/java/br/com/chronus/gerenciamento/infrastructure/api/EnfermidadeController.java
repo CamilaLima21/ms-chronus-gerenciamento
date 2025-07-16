@@ -1,14 +1,22 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
 import br.com.chronus.gerenciamento.application.domain.Enfermidade;
-import br.com.chronus.gerenciamento.application.dto.enfermidades.UpdateEnfermidadeRequest;
+import br.com.chronus.gerenciamento.application.dto.enfermidades.EnfermidadeRequest;
 import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
 import br.com.chronus.gerenciamento.application.gateway.EnfermidadeGateway;
+import br.com.chronus.gerenciamento.application.mapper.EnfermidadeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +27,11 @@ import java.util.Optional;
 public class EnfermidadeController {
 
     private final EnfermidadeGateway enfermidadeGateway;
+    private final EnfermidadeMapper enfermidadeMapper;
 
     @PostMapping
-    public ResponseEntity<Enfermidade> createEnfermidade(@Validated @RequestBody UpdateEnfermidadeRequest dto) {
-        Enfermidade created = enfermidadeGateway.save(mapToDomain(dto, null));
+    public ResponseEntity<Enfermidade> createEnfermidade(@Validated @RequestBody EnfermidadeRequest dto) {
+        Enfermidade created = enfermidadeGateway.save(enfermidadeMapper.mapToDomain(dto, null));
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -34,8 +43,8 @@ public class EnfermidadeController {
     }
 
     @PutMapping("/{idEnfermidade}")
-    public ResponseEntity<Enfermidade> updateEnfermidade(@PathVariable Integer idEnfermidade, @Validated @RequestBody UpdateEnfermidadeRequest dto) {
-        Enfermidade updated = enfermidadeGateway.update(mapToDomain(dto, idEnfermidade));
+    public ResponseEntity<Enfermidade> updateEnfermidade(@PathVariable Integer idEnfermidade, @Validated @RequestBody EnfermidadeRequest dto) {
+        Enfermidade updated = enfermidadeGateway.update(enfermidadeMapper.mapToDomain(dto, idEnfermidade));
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
@@ -58,19 +67,11 @@ public class EnfermidadeController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/enum/{enfermidade}")
+    @GetMapping("/nome/{enfermidade}")
     public ResponseEntity<Enfermidade> getEnfermidadeByEnum(@PathVariable EnumEnfermidade enfermidade) {
         Optional<Enfermidade> result = enfermidadeGateway.findEnfermidadeByEnumEnfermidade(enfermidade);
         return result.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    private Enfermidade mapToDomain(UpdateEnfermidadeRequest dto, Integer id) {
-        return Enfermidade.builder()
-                .idEnfermidade(id)
-                .enfermidade(dto.getEnfermidade())
-                .descricaoEnfermidade(dto.getDescricaoEnfermidade())
-                .cid(dto.getCid())
-                .build();
-    }
 }

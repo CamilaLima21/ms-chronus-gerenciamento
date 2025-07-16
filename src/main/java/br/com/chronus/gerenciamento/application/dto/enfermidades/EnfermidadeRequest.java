@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateEnfermidadeRequest {
+public class EnfermidadeRequest {
 
     @NotNull(message = "O tipo de enfermidade é obrigatório")
     private EnumEnfermidade enfermidade;
