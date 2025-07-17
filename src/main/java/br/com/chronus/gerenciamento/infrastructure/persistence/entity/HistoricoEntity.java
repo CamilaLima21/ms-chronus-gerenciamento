@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,20 +34,37 @@ public class HistoricoEntity {
     @Column(name = "id_paciente", nullable = false)
     private Integer idPaciente;
 
-    @Column(name = "enfermidade_id", nullable = false)
-    private Integer enfermidades;
+    @ManyToMany
+    @JoinTable(
+            name = "historico_enfermidade",
+            joinColumns = @JoinColumn(name = "historico_id"),
+            inverseJoinColumns = @JoinColumn(name = "enfermidade_id")
+    )
+    private List<EnfermidadeEntity> enfermidades;
 
-    @Column(name = "medicacao_id", nullable = false)
-    private Integer medicamentos;
+    @ManyToMany
+    @JoinTable(
+            name = "historico_tratamento",
+            joinColumns = @JoinColumn(name = "historico_id"),
+            inverseJoinColumns = @JoinColumn(name = "tratamento_id")
+    )
+    private List<TratamentoEntity> tratamentos;
 
-    @Column(name = "tratamento_id")
-    private Integer tratamento;
+    @ManyToMany
+    @JoinTable(
+            name = "historico_consulta",
+            joinColumns = @JoinColumn(name = "historico_id"),
+            inverseJoinColumns = @JoinColumn(name = "consulta_id")
+    )
+    private List<ConsultaEntity> consultas;
 
-    @Column(name = "consulta_id")
-    private Integer consulta;
-
-    @Column(name = "id_checkup")
-    private Integer idCheckup;
+    @ManyToMany
+    @JoinTable(
+            name = "historico_checkup",
+            joinColumns = @JoinColumn(name = "historico_id"),
+            inverseJoinColumns = @JoinColumn(name = "checkup_id")
+    )
+    private List<CheckUpSaudeEntity> checkups;
 
     @Column(name = "observacoes")
     private String observacoes;
@@ -55,5 +74,4 @@ public class HistoricoEntity {
 
     @Column(name = "data_fim")
     private LocalDate dataFim;
-
 }

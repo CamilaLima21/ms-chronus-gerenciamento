@@ -1,10 +1,12 @@
 package br.com.chronus.gerenciamento.infrastructure.api;
 
+import br.com.chronus.gerenciamento.application.domain.CheckUpSaude;
 import br.com.chronus.gerenciamento.application.domain.Historico;
-import br.com.chronus.gerenciamento.application.dto.historico.CreateHistoricoRequestDto;
+import br.com.chronus.gerenciamento.application.dto.historico.HistoricoRequestDto;
 import br.com.chronus.gerenciamento.application.mapper.HistoricoMapper;
 import br.com.chronus.gerenciamento.application.usecase.historico.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,11 @@ public class HistoricoController {
     private final BuscarHistoricoPorIdUseCase buscarHistoricoPorIdUseCase;
     private final ListarHistoricoPorPacienteUseCase listarHistoricoPorPacienteUseCase;
     private final DeletarHistoricoPorIdUseCase deletarHistoricoPorIdUseCase;
+    private final HistoricoMapper historicoMapper;
 
     @PostMapping
-    public ResponseEntity<Historico> salvar(@Validated @RequestBody CreateHistoricoRequestDto createHistoricoRequestDto) {
-        Historico historico = HistoricoMapper.toDomain(createHistoricoRequestDto);
+    public ResponseEntity<Historico> salvar(@Validated @RequestBody HistoricoRequestDto historicoRequestDto) {
+        Historico historico = historicoMapper.toDomain(historicoRequestDto);
         Historico created = salvarHistoricoUseCase.executar(historico);
         return ResponseEntity.ok(salvarHistoricoUseCase.executar(created));
     }
@@ -33,6 +36,12 @@ public class HistoricoController {
         return buscarHistoricoPorIdUseCase.executar(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CheckUpSaude>> findAll() {
+        List<CheckUpSaude> list = checkUpSaudeGateway.findAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/paciente/{idPaciente}")

@@ -15,7 +15,7 @@ public class PacienteGatewayImpl implements PacienteGateway {
     @Override
     public boolean verificaPacientePorId(Integer idPaciente) {
         try {
-            pessoasClient.getPacienteById(idPaciente); // 200 = ok
+            pessoasClient.getPacienteById(idPaciente);
             return true;
         } catch (FeignException.NotFound e) {
             return false;

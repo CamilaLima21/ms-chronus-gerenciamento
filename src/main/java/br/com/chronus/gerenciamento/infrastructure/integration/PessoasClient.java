@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "ms-chronus-pessoas", url = "${ms.pessoas.url}")
 public interface PessoasClient {
 
-    @GetMapping("chronus/pacientes{idPaciente}")
+    @GetMapping("/chronus/pacientes/{idPaciente}")
     void getPacienteById(@PathVariable("idPaciente") Integer idPaciente);
 
     @GetMapping("/chronus/profissionais-saude/id/{idProfissionalSaude}")

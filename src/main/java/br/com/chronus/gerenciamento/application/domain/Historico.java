@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,11 +17,10 @@ public class Historico {
 
     private Integer id;
     private Integer idPaciente;
-    private Integer enfermidades;
-    private Integer medicamentos;
-    private Integer tratamento;
-    private Integer consulta;
-    private Integer idCheckup;
+    private List<Enfermidade> enfermidades;
+    private List<Tratamento> tratamentos;
+    private List<Consulta> consultas;
+    private List<CheckUpSaude> checkups;
     private String observacoes;
     private LocalDate dataInicio;
     private LocalDate dataFim;

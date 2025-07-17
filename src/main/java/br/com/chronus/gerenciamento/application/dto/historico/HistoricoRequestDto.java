@@ -4,30 +4,27 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
-public class CreateHistoricoRequestDto {
+public class HistoricoRequestDto {
 
     @NotNull(message = "O ID do paciente é obrigatório")
     private Integer idPaciente;
 
-    @NotNull(message = "O ID da enfermidade de saúde é obrigatório")
-    private Integer idEnfermidade;
+    @NotNull(message = "Os IDs das enfermidades são obrigatórios")
+    private List<Integer> idEnfermidades;
 
-    @NotNull(message = "O ID da medicação é obrigatório")
-    private Integer idMedicacao;
+    @NotNull(message = "Os IDs dos tratamentos são obrigatórios")
+    private List<Integer> idTratamentos;
 
-    @NotNull(message = "O ID do tratamento é obrigatório")
-    private Integer idTratamento;
+    @NotNull(message = "Os IDs das consultas são obrigatórios")
+    private List<Integer> idConsultas;
 
-    @NotNull(message = "O ID da consulta é obrigatório")
-    private Integer idConsulta;
-
-    @NotNull(message = "O ID do checkup é obrigatório")
-    private Integer idCheckup;
+    @NotNull(message = "Os IDs dos checkups são obrigatórios")
+    private List<Integer> idCheckups;
 
     @Size(max = 500, message = "As observações devem ter no máximo 500 caracteres")
     private String observacoes;
