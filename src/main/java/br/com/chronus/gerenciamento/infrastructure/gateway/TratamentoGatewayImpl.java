@@ -8,7 +8,7 @@ import br.com.chronus.gerenciamento.infrastructure.persistence.repository.Tratam
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
