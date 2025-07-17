@@ -1,8 +1,8 @@
 package br.com.chronus.gerenciamento.application.mapper;
 
-import org.springframework.stereotype.Component;
 import br.com.chronus.gerenciamento.application.domain.Exame;
 import br.com.chronus.gerenciamento.application.dto.exame.ExameRequest;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ExameMapper {

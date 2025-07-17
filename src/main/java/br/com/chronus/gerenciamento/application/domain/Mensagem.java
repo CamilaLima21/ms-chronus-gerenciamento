@@ -1,12 +1,8 @@
 package br.com.chronus.gerenciamento.application.domain;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoMensagem;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 @Getter
 @Setter

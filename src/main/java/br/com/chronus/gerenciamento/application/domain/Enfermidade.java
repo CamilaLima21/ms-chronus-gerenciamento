@@ -1,8 +1,6 @@
 package br.com.chronus.gerenciamento.application.domain;
 
 import br.com.chronus.gerenciamento.application.enums.EnumEnfermidade;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Getter

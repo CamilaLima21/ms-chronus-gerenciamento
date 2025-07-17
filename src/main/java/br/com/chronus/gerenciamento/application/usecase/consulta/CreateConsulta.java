@@ -20,12 +20,14 @@ public class CreateConsulta {
 
     public Consulta execute(final Consulta requestConsulta) {
 
-        final var consulta = consultaGateway.getConsultaById(requestConsulta.getIdConsulta());
-        if (consulta.isPresent()) {
-            throw new ConsultaExistenteException(
-                    requestConsulta.getIdConsulta(),
-                    requestConsulta.getDataHoraConsulta()
-            );
+        if (requestConsulta.getIdConsulta() != null) {
+            final var consulta = consultaGateway.getConsultaById(requestConsulta.getIdConsulta());
+            if (consulta.isPresent()) {
+                throw new ConsultaExistenteException(
+                        requestConsulta.getIdConsulta(),
+                        requestConsulta.getDataHoraConsulta()
+                );
+            }
         }
 
         boolean pacienteExiste = pacienteGateway.verificaPacientePorId(requestConsulta.getIdPaciente());

@@ -1,8 +1,8 @@
 package br.com.chronus.gerenciamento.application.mapper;
 
-import org.springframework.stereotype.Component;
 import br.com.chronus.gerenciamento.application.domain.Consulta;
 import br.com.chronus.gerenciamento.application.dto.consulta.ConsultaRequest;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ConsultaMapper {

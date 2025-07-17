@@ -3,11 +3,8 @@ package br.com.chronus.gerenciamento.application.domain;
 import br.com.chronus.gerenciamento.application.enums.HorarioEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
