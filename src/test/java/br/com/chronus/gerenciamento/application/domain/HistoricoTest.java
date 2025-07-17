@@ -3,75 +3,76 @@ package br.com.chronus.gerenciamento.application.domain;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class HistoricoTest {
 
     @Test
-    void deveCriarHistoricoComBuilderEVerificarCampos() {
-
-        Integer id = 1;
-        Integer idPaciente = 100;
-        Integer enfermidades = 2;
-        Integer medicamentos = 3;
-        Integer tratamento = 1;
-        Integer consulta = 5;
-        Integer idCheckup = 7;
-        String observacoes = "Paciente apresenta melhora.";
-        LocalDate dataInicio = LocalDate.of(2025, 7, 1);
-        LocalDate dataFim = LocalDate.of(2025, 7, 15);
+    void deveConstruirHistoricoComBuilder() {
+        Enfermidade enfermidade = new Enfermidade();
+        Tratamento tratamento = new Tratamento();
+        Consulta consulta = new Consulta();
+        CheckUpSaude checkup = new CheckUpSaude();
 
         Historico historico = Historico.builder()
-                .id(id)
-                .idPaciente(idPaciente)
-                .enfermidades(enfermidades)
-                .medicamentos(medicamentos)
-                .tratamento(tratamento)
-                .consulta(consulta)
-                .idCheckup(idCheckup)
-                .observacoes(observacoes)
-                .dataInicio(dataInicio)
-                .dataFim(dataFim)
+                .id(1)
+                .idPaciente(10)
+                .enfermidades(List.of(enfermidade))
+                .tratamentos(List.of(tratamento))
+                .consultas(List.of(consulta))
+                .checkups(List.of(checkup))
+                .observacoes("Paciente com histórico leve")
+                .dataInicio(LocalDate.of(2023, 1, 1))
+                .dataFim(LocalDate.of(2023, 12, 31))
                 .build();
 
-        assertEquals(id, historico.getId());
-        assertEquals(idPaciente, historico.getIdPaciente());
-        assertEquals(enfermidades, historico.getEnfermidades());
-        assertEquals(medicamentos, historico.getMedicamentos());
-        assertEquals(tratamento, historico.getTratamento());
-        assertEquals(consulta, historico.getConsulta());
-        assertEquals(idCheckup, historico.getIdCheckup());
-        assertEquals(observacoes, historico.getObservacoes());
-        assertEquals(dataInicio, historico.getDataInicio());
-        assertEquals(dataFim, historico.getDataFim());
+        assertThat(historico.getId()).isEqualTo(1);
+        assertThat(historico.getIdPaciente()).isEqualTo(10);
+        assertThat(historico.getEnfermidades()).containsExactly(enfermidade);
+        assertThat(historico.getTratamentos()).containsExactly(tratamento);
+        assertThat(historico.getConsultas()).containsExactly(consulta);
+        assertThat(historico.getCheckups()).containsExactly(checkup);
+        assertThat(historico.getObservacoes()).isEqualTo("Paciente com histórico leve");
+        assertThat(historico.getDataInicio()).isEqualTo(LocalDate.of(2023, 1, 1));
+        assertThat(historico.getDataFim()).isEqualTo(LocalDate.of(2023, 12, 31));
     }
 
     @Test
-    void deveAlterarCamposComSetters() {
+    void devePermitirCriarHistoricoComConstrutorCompleto() {
+        Historico historico = new Historico(
+                2,
+                20,
+                null,
+                null,
+                null,
+                null,
+                "Observação qualquer",
+                LocalDate.of(2024, 1, 1),
+                LocalDate.of(2024, 6, 30)
+        );
 
+        assertThat(historico.getId()).isEqualTo(2);
+        assertThat(historico.getIdPaciente()).isEqualTo(20);
+        assertThat(historico.getObservacoes()).isEqualTo("Observação qualquer");
+        assertThat(historico.getDataInicio()).isEqualTo(LocalDate.of(2024, 1, 1));
+        assertThat(historico.getDataFim()).isEqualTo(LocalDate.of(2024, 6, 30));
+    }
+
+    @Test
+    void devePermitirAlterarCamposComSetters() {
         Historico historico = new Historico();
+        historico.setId(5);
+        historico.setIdPaciente(100);
+        historico.setObservacoes("Atualizado");
+        historico.setDataInicio(LocalDate.of(2022, 5, 1));
+        historico.setDataFim(LocalDate.of(2022, 12, 31));
 
-        historico.setId(10);
-        historico.setIdPaciente(200);
-        historico.setEnfermidades(4);
-        historico.setMedicamentos(6);
-        historico.setTratamento(2);
-        historico.setConsulta(3);
-        historico.setIdCheckup(8);
-        historico.setObservacoes("Nova observação");
-        historico.setDataInicio(LocalDate.of(2025, 8, 1));
-        historico.setDataFim(LocalDate.of(2025, 8, 20));
-
-        assertEquals(10, historico.getId());
-        assertEquals(200, historico.getIdPaciente());
-        assertEquals(4, historico.getEnfermidades());
-        assertEquals(6, historico.getMedicamentos());
-        assertEquals(2, historico.getTratamento());
-        assertEquals(3, historico.getConsulta());
-        assertEquals(8, historico.getIdCheckup());
-        assertEquals("Nova observação", historico.getObservacoes());
-        assertEquals(LocalDate.of(2025, 8, 1), historico.getDataInicio());
-        assertEquals(LocalDate.of(2025, 8, 20), historico.getDataFim());
+        assertThat(historico.getId()).isEqualTo(5);
+        assertThat(historico.getIdPaciente()).isEqualTo(100);
+        assertThat(historico.getObservacoes()).isEqualTo("Atualizado");
+        assertThat(historico.getDataInicio()).isEqualTo(LocalDate.of(2022, 5, 1));
+        assertThat(historico.getDataFim()).isEqualTo(LocalDate.of(2022, 12, 31));
     }
 }

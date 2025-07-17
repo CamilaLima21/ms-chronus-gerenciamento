@@ -1,12 +1,8 @@
 package br.com.chronus.gerenciamento.application.mapper;
 
-<<<<<<< HEAD
-=======
-import br.com.chronus.gerenciamento.infrastructure.persistence.entity.ConsultaEntity;
-import org.springframework.stereotype.Component;
->>>>>>> ee25d44ecb2ed8c9df96623ed5ce0c6866207022
 import br.com.chronus.gerenciamento.application.domain.Consulta;
 import br.com.chronus.gerenciamento.application.dto.consulta.ConsultaRequest;
+import br.com.chronus.gerenciamento.infrastructure.persistence.entity.ConsultaEntity;
 import org.springframework.stereotype.Component;
 
 @Component
