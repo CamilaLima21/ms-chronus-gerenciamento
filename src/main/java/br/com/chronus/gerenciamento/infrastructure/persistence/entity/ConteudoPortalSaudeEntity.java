@@ -24,6 +24,9 @@ public class ConteudoPortalSaudeEntity {
     @Column(name = "filtro_portal_saude", nullable = false)
     private EnumFiltroPortalSaude filtroPortalSaude;
 
+    @ElementCollection
+    @CollectionTable(name = "conteudo_portal_saude_conteudos", joinColumns = @JoinColumn(name = "id_conteudo"))
     @Column(name = "conteudo")
     private List<String> conteudos;
+
 }
