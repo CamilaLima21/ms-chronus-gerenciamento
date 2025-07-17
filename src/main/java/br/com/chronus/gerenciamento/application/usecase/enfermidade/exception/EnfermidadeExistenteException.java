@@ -1,8 +1,6 @@
 package br.com.chronus.gerenciamento.application.usecase.enfermidade.exception;
 
 import br.com.chronus.gerenciamento.application.usecase.exception.BusinessException;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 import static java.lang.String.format;

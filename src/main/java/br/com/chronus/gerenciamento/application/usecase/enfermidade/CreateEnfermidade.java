@@ -2,8 +2,6 @@ package br.com.chronus.gerenciamento.application.usecase.enfermidade;
 
 import br.com.chronus.gerenciamento.application.domain.Enfermidade;
 import br.com.chronus.gerenciamento.application.gateway.EnfermidadeGateway;
-import br.com.chronus.gerenciamento.application.gateway.PacienteGateway;
-import br.com.chronus.gerenciamento.application.usecase.consulta.exception.PacienteNaoEncontradoException;
 import br.com.chronus.gerenciamento.application.usecase.enfermidade.exception.EnfermidadeExistenteException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
