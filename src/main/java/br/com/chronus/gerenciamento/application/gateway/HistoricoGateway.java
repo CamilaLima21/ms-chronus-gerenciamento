@@ -1,7 +1,6 @@
 package br.com.chronus.gerenciamento.application.gateway;
 
 import br.com.chronus.gerenciamento.application.domain.Historico;
-import br.com.chronus.gerenciamento.application.dto.historico.CreateHistoricoRequestDto;
 
 import java.util.List;
 import java.util.Optional;

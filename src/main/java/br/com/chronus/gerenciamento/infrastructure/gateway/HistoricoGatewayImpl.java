@@ -2,8 +2,13 @@ package br.com.chronus.gerenciamento.infrastructure.gateway;
 
 import br.com.chronus.gerenciamento.application.domain.Historico;
 import br.com.chronus.gerenciamento.application.gateway.HistoricoGateway;
+import br.com.chronus.gerenciamento.application.mapper.CheckUpMapper;
+import br.com.chronus.gerenciamento.application.mapper.ConsultaMapper;
+import br.com.chronus.gerenciamento.application.mapper.EnfermidadeMapper;
+import br.com.chronus.gerenciamento.application.mapper.TratamentoMapper;
 import br.com.chronus.gerenciamento.infrastructure.persistence.entity.HistoricoEntity;
 import br.com.chronus.gerenciamento.infrastructure.persistence.repository.HistoricoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,13 +16,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class HistoricoGatewayImpl implements HistoricoGateway {
 
     private final HistoricoRepository historicoRepository;
-
-    public HistoricoGatewayImpl(HistoricoRepository historicoRepository) {
-        this.historicoRepository = historicoRepository;
-    }
+    private final EnfermidadeMapper enfermidadeMapper;
+    private final TratamentoMapper tratamentoMapper;
+    private final ConsultaMapper consultaMapper;
+    private final CheckUpMapper checkupMapper;
 
     @Override
     public Historico salvar(Historico historico) {
@@ -49,11 +55,34 @@ public class HistoricoGatewayImpl implements HistoricoGateway {
         HistoricoEntity entity = new HistoricoEntity();
         entity.setId(historico.getId() != null ? historico.getId().longValue() : null);
         entity.setIdPaciente(historico.getIdPaciente());
-        entity.setEnfermidades(historico.getEnfermidades());
-        entity.setMedicamentos(historico.getMedicamentos());
-        entity.setTratamento(historico.getTratamento());
-        entity.setConsulta(historico.getConsulta());
-        entity.setIdCheckup(historico.getIdCheckup());
+        entity.setEnfermidades(
+                historico.getEnfermidades() != null
+                        ? historico.getEnfermidades().stream()
+                        .map(enfermidadeMapper::toEnfermidadeEntity)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        entity.setTratamentos(
+                historico.getTratamentos() != null
+                        ? historico.getTratamentos().stream()
+                        .map(tratamentoMapper::mapToEntity)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        entity.setConsultas(
+                historico.getConsultas() != null
+                        ? historico.getConsultas().stream()
+                        .map(consultaMapper::toConsultaEntity)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        entity.setCheckups(
+                historico.getCheckups() != null
+                        ? historico.getCheckups().stream()
+                        .map(checkupMapper::mapToEntity)
+                        .collect(Collectors.toList())
+                        : null
+        );
         entity.setObservacoes(historico.getObservacoes());
         entity.setDataInicio(historico.getDataInicio());
         entity.setDataFim(historico.getDataFim());
@@ -64,15 +93,37 @@ public class HistoricoGatewayImpl implements HistoricoGateway {
         Historico historico = new Historico();
         historico.setId(entity.getId() != null ? entity.getId().intValue() : null);
         historico.setIdPaciente(entity.getIdPaciente());
-        historico.setEnfermidades(entity.getEnfermidades());
-        historico.setMedicamentos(entity.getMedicamentos());
-        historico.setTratamento(entity.getTratamento());
-        historico.setConsulta(entity.getConsulta());
-        historico.setIdCheckup(entity.getIdCheckup());
+        historico.setEnfermidades(
+                entity.getEnfermidades() != null
+                        ? entity.getEnfermidades().stream()
+                        .map(enfermidadeMapper::toEnfermidade)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        historico.setTratamentos(
+                entity.getTratamentos() != null
+                        ? entity.getTratamentos().stream()
+                        .map(tratamentoMapper::mapToDomain)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        historico.setConsultas(
+                entity.getConsultas() != null
+                        ? entity.getConsultas().stream()
+                        .map(consultaMapper::toConsulta)
+                        .collect(Collectors.toList())
+                        : null
+        );
+        historico.setCheckups(
+                entity.getCheckups() != null
+                        ? entity.getCheckups().stream()
+                        .map(checkupMapper::mapToDomain)
+                        .collect(Collectors.toList())
+                        : null
+        );
         historico.setObservacoes(entity.getObservacoes());
         historico.setDataInicio(entity.getDataInicio());
         historico.setDataFim(entity.getDataFim());
-
         return historico;
     }
 }
