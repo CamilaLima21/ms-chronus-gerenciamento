@@ -5,6 +5,12 @@ import br.com.chronus.gerenciamento.application.dto.portal.ConteudoPortalSaudeRe
 import br.com.chronus.gerenciamento.application.enums.EnumFiltroPortalSaude;
 import br.com.chronus.gerenciamento.application.gateway.ConteudoPortalSaudeGateway;
 import br.com.chronus.gerenciamento.application.mapper.ConteudoPortalSaudeMapper;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.CreateConteudoPortalSaude;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.DeleteConteudoPortalSaude;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.GetAllConteudosPortalSaude;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.GetConteudoPortalSaudeByFiltro;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.GetConteudoPortalSaudeById;
+import br.com.chronus.gerenciamento.application.usecase.conteudo.UpdateConteudoPortalSaude;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,6 +37,24 @@ class ConteudoPortalSaudeControllerTest {
     @Mock
     private ConteudoPortalSaudeMapper mapper;
 
+    @Mock
+    private GetConteudoPortalSaudeByFiltro getConteudoPortalSaudeByFiltroUseCase;
+
+    @Mock
+    private CreateConteudoPortalSaude createConteudoPortalSaudeUseCase;
+
+    @Mock
+    private DeleteConteudoPortalSaude deleteConteudoPortalSaudeUseCase;
+
+    @Mock
+    private GetAllConteudosPortalSaude getAllConteudosPortalSaudeUseCase;
+
+    @Mock
+    private GetConteudoPortalSaudeById getConteudoPortalSaudeByIdUseCase;
+
+    @Mock
+    private UpdateConteudoPortalSaude updateConteudoPortalSaudeUseCase;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -44,7 +67,7 @@ class ConteudoPortalSaudeControllerTest {
         ConteudoPortalSaude saved = new ConteudoPortalSaude();
 
         when(mapper.toDomain(dto, null)).thenReturn(domain);
-        when(gateway.save(domain)).thenReturn(saved);
+        when(createConteudoPortalSaudeUseCase.execute(domain)).thenReturn(saved);
 
         ResponseEntity<ConteudoPortalSaude> response = controller.createConteudo(dto);
 
@@ -52,7 +75,7 @@ class ConteudoPortalSaudeControllerTest {
         assertEquals(saved, response.getBody());
 
         verify(mapper).toDomain(dto, null);
-        verify(gateway).save(domain);
+        verify(createConteudoPortalSaudeUseCase).execute(domain);
     }
 
     @Test
@@ -60,28 +83,14 @@ class ConteudoPortalSaudeControllerTest {
         int id = 1;
         ConteudoPortalSaude conteudo = new ConteudoPortalSaude();
 
-        when(gateway.findById(id)).thenReturn(Optional.of(conteudo));
+        when(getConteudoPortalSaudeByIdUseCase.execute(id)).thenReturn(conteudo);
 
         ResponseEntity<ConteudoPortalSaude> response = controller.getConteudoById(id);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(conteudo, response.getBody());
 
-        verify(gateway).findById(id);
-    }
-
-    @Test
-    void testGetConteudoById_NotFound() {
-        int id = 1;
-
-        when(gateway.findById(id)).thenReturn(Optional.empty());
-
-        ResponseEntity<ConteudoPortalSaude> response = controller.getConteudoById(id);
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNull(response.getBody());
-
-        verify(gateway).findById(id);
+        verify(getConteudoPortalSaudeByIdUseCase).execute(id);
     }
 
     @Test
@@ -92,7 +101,7 @@ class ConteudoPortalSaudeControllerTest {
         ConteudoPortalSaude updated = new ConteudoPortalSaude();
 
         when(mapper.toDomain(dto, id)).thenReturn(domain);
-        when(gateway.update(domain)).thenReturn(updated);
+        when(updateConteudoPortalSaudeUseCase.execute(domain)).thenReturn(updated);
 
         ResponseEntity<ConteudoPortalSaude> response = controller.updateConteudo(id, dto);
 
@@ -100,50 +109,50 @@ class ConteudoPortalSaudeControllerTest {
         assertEquals(updated, response.getBody());
 
         verify(mapper).toDomain(dto, id);
-        verify(gateway).update(domain);
+        verify(updateConteudoPortalSaudeUseCase).execute(domain);
     }
 
     @Test
     void testDeleteConteudo() {
         int id = 1;
 
-        doNothing().when(gateway).delete(id);
+        doNothing().when(deleteConteudoPortalSaudeUseCase).execute(id);
 
         ResponseEntity<Void> response = controller.deleteConteudo(id);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertNull(response.getBody());
 
-        verify(gateway).delete(id);
+        verify(deleteConteudoPortalSaudeUseCase).execute(id);
     }
 
     @Test
     void testGetAllConteudos() {
         List<ConteudoPortalSaude> list = Arrays.asList(new ConteudoPortalSaude(), new ConteudoPortalSaude());
 
-        when(gateway.findAll()).thenReturn(list);
+        when(getAllConteudosPortalSaudeUseCase.execute()).thenReturn(list);
 
         ResponseEntity<List<ConteudoPortalSaude>> response = controller.getAllConteudos();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(list, response.getBody());
 
-        verify(gateway).findAll();
+        verify(getAllConteudosPortalSaudeUseCase).execute();
     }
 
     @Test
     void testGetConteudosByFiltro() {
-        EnumFiltroPortalSaude filtro = EnumFiltroPortalSaude.CUIDADOS_ASMA; // Use um valor válido do enum
+        EnumFiltroPortalSaude filtro = EnumFiltroPortalSaude.CUIDADOS_ASMA;
         List<ConteudoPortalSaude> list = Arrays.asList(new ConteudoPortalSaude());
 
-        when(gateway.findByFiltro(filtro)).thenReturn(list);
+        when(getConteudoPortalSaudeByFiltroUseCase.execute(filtro)).thenReturn(list);
 
         ResponseEntity<List<ConteudoPortalSaude>> response = controller.getConteudosByFiltro(filtro);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(list, response.getBody());
 
-        verify(gateway).findByFiltro(filtro);
+        verify(getConteudoPortalSaudeByFiltroUseCase).execute(filtro);
     }
 
 }

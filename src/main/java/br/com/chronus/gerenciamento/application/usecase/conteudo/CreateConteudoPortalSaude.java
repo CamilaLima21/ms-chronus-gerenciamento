@@ -13,13 +13,6 @@ public class CreateConteudoPortalSaude {
     private final ConteudoPortalSaudeGateway gateway;
 
     public ConteudoPortalSaude execute(final ConteudoPortalSaude request) {
-
-        final var existing = gateway.findById(request.getId());
-
-        if (existing.isPresent()) {
-            throw new ConteudoExistenteException(request.getId());
-        }
-
         return gateway.save(request);
     }
 }
