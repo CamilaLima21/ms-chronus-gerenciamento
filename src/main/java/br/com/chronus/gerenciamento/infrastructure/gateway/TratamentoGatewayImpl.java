@@ -1,6 +1,7 @@
 package br.com.chronus.gerenciamento.infrastructure.gateway;
 
 import br.com.chronus.gerenciamento.application.domain.Tratamento;
+import br.com.chronus.gerenciamento.application.enums.HorarioEnum;
 import br.com.chronus.gerenciamento.application.gateway.TratamentoGateway;
 import br.com.chronus.gerenciamento.application.mapper.TratamentoMapper;
 import br.com.chronus.gerenciamento.infrastructure.persistence.entity.TratamentoEntity;
@@ -9,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,6 +69,12 @@ public class TratamentoGatewayImpl implements TratamentoGateway {
                 .stream()
                 .map(tratamentoMapper::mapToDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TratamentoEntity> findByPeriodoAndHorario(LocalDate data, HorarioEnum horario) {
+        return tratamentoRepository.findByInicioTratamentoLessThanEqualAndFimTratamentoGreaterThanEqualAndHorariosContaining(
+                data, data, horario);
     }
 
 }

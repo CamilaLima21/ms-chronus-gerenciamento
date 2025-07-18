@@ -20,13 +20,12 @@ public class ConsultaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
     private Integer idConsulta;
 
-    @Column(name = "id_paciente", nullable = false, unique = true)
+    @Column(name = "id_paciente", nullable = false)
     private Integer idPaciente;
 
-    @Column(name = "id_profissional_saude", nullable = false, unique = true)
+    @Column(name = "id_profissional_saude", nullable = false)
     private Integer idProfissionalSaude;
 
     @Column(name = "data_hora_consulta", nullable = false)

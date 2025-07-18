@@ -2,19 +2,24 @@ package br.com.chronus.gerenciamento.infrastructure.gateway;
 
 import br.com.chronus.gerenciamento.application.domain.Consulta;
 import br.com.chronus.gerenciamento.application.gateway.ConsultaGateway;
+import br.com.chronus.gerenciamento.application.mapper.ConsultaMapper;
 import br.com.chronus.gerenciamento.infrastructure.persistence.entity.ConsultaEntity;
 import br.com.chronus.gerenciamento.infrastructure.persistence.repository.ConsultaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class ConsultaGatewayImpl implements ConsultaGateway {
 
     private final ConsultaRepository consultaRepository;
+    private final ConsultaMapper mapper;
 
     @Override
     public Consulta createConsulta(Consulta consulta) {
@@ -47,6 +52,14 @@ public class ConsultaGatewayImpl implements ConsultaGateway {
                 .orElseThrow(() -> new IllegalArgumentException(
                         String.format("Consulta não encontrada com o ID [%s]", idConsulta)));
         consultaRepository.delete(entity);
+    }
+
+    @Override
+    public List<Consulta> findByDataConsulta(LocalDate data) {
+        List<ConsultaEntity> entities = consultaRepository.findByDataConsulta(data);
+        return entities.stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     private ConsultaEntity mapToEntity(Consulta consulta) {
