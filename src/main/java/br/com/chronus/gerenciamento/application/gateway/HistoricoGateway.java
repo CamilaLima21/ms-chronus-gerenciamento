@@ -9,5 +9,6 @@ public interface HistoricoGateway {
     Historico salvar(Historico historico);
     Optional<Historico> buscarPorId(Integer id);
     List<Historico> listarPorPaciente(Integer idPaciente);
+    List<Historico> buscarTodos();
     void deletarPorId(Integer id);
 }

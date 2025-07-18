@@ -60,10 +60,10 @@ class HistoricoControllerTest {
         ResponseEntity<Historico> response = controller.salvar(dto);
 
         assertEquals(saved, response.getBody());
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(201, response.getStatusCodeValue());
 
         verify(historicoMapper).toDomain(dto);
-        verify(salvarHistoricoUseCase, times(2)).executar(any());
+        verify(salvarHistoricoUseCase, times(1)).executar(any());
     }
 
     @Test

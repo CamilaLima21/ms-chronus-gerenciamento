@@ -51,6 +51,15 @@ public class HistoricoGatewayImpl implements HistoricoGateway {
         historicoRepository.deleteById(id.longValue());
     }
 
+    @Override
+    public List<Historico> buscarTodos() {
+        return historicoRepository.findAll()
+                .stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+
     private HistoricoEntity toEntity(Historico historico) {
         HistoricoEntity entity = new HistoricoEntity();
         entity.setId(historico.getId() != null ? historico.getId().longValue() : null);

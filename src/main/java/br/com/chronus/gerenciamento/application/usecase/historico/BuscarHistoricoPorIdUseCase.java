@@ -6,7 +6,6 @@ import br.com.chronus.gerenciamento.application.gateway.PacienteGateway;
 import br.com.chronus.gerenciamento.application.usecase.consulta.exception.PacienteNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.Optional;
 
 @Component

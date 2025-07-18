@@ -8,16 +8,10 @@ import java.util.Optional;
 public interface CheckUpSaudeGateway {
 
     CheckUpSaude save(final CheckUpSaude checkUpSaude);
-
     Optional<CheckUpSaude> findById(final Integer idCheckUpSaude);
-
     CheckUpSaude update(final CheckUpSaude checkUpSaude);
-
     void delete(final Integer idCheckUpSaude);
-
     List<CheckUpSaude> findAll();
-
     List<CheckUpSaude> findByPacienteId(final Integer idPaciente);
-
     List<CheckUpSaude> findByProfissionalSaudeId(final Integer idProfissionalSaude);
 }
