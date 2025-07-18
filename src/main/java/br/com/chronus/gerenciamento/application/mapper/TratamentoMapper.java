@@ -3,6 +3,7 @@ package br.com.chronus.gerenciamento.application.mapper;
 import br.com.chronus.gerenciamento.application.domain.Tratamento;
 import br.com.chronus.gerenciamento.infrastructure.persistence.entity.TratamentoEntity;
 import org.springframework.stereotype.Component;
+
 import java.util.stream.Collectors;
 
 @Component
@@ -17,6 +18,7 @@ public class TratamentoMapper {
     public TratamentoEntity mapToEntity(Tratamento tratamento) {
         return TratamentoEntity.builder()
                 .idTratamento(tratamento.getIdTratamento())
+                .idPaciente(tratamento.getIdPaciente())
                 .medicamentos(
                         tratamento.getMedicamentos() != null ?
                                 tratamento.getMedicamentos().stream()
@@ -35,6 +37,7 @@ public class TratamentoMapper {
     public Tratamento mapToDomain(TratamentoEntity entity) {
         return Tratamento.builder()
                 .idTratamento(entity.getIdTratamento())
+                .idPaciente(entity.getIdPaciente())
                 .medicamentos(
                         entity.getMedicamentos() != null ?
                                 entity.getMedicamentos().stream()

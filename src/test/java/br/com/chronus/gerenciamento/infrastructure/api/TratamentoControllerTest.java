@@ -119,4 +119,33 @@ class TratamentoControllerTest {
 
         verify(tratamentoGateway).findAll();
     }
+
+    @Test
+    void testGetTratamentosByPacienteId_WithResults() {
+        Integer idPaciente = 42;
+        List<Tratamento> tratamentos = List.of(new Tratamento(), new Tratamento());
+
+        when(tratamentoGateway.findByPacienteId(idPaciente)).thenReturn(tratamentos);
+
+        ResponseEntity<List<Tratamento>> response = controller.getTratamentosByPacienteId(idPaciente);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(tratamentos, response.getBody());
+
+        verify(tratamentoGateway).findByPacienteId(idPaciente);
+    }
+
+    @Test
+    void testGetTratamentosByPacienteId_NoResults() {
+        Integer idPaciente = 99;
+
+        when(tratamentoGateway.findByPacienteId(idPaciente)).thenReturn(List.of());
+
+        ResponseEntity<List<Tratamento>> response = controller.getTratamentosByPacienteId(idPaciente);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertNull(response.getBody());
+
+        verify(tratamentoGateway).findByPacienteId(idPaciente);
+    }
 }

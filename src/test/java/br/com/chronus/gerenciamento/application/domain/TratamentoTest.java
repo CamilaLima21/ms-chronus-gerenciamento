@@ -46,8 +46,10 @@ class TratamentoTest {
         String periodicidade = "2 vezes ao dia";
         String dosagem = "500mg";
         List<HorarioEnum> horarios = List.of(HorarioEnum.H08, HorarioEnum.H20);
+        Integer idPaciente = 101;
 
         Tratamento tratamento = Tratamento.createTratamento(
+                idPaciente,
                 medicamentos,
                 inicioTratamento,
                 fimTratamento,
@@ -58,6 +60,7 @@ class TratamentoTest {
 
         assertNotNull(tratamento);
         assertNull(tratamento.getIdTratamento());
+        assertEquals(idPaciente, tratamento.getIdPaciente());
         assertEquals(2, tratamento.getMedicamentos().size());
         assertEquals("Paracetamol", tratamento.getMedicamentos().get(0).getNomeMedicacao());
         assertEquals(inicioTratamento, tratamento.getInicioTratamento());
@@ -71,19 +74,24 @@ class TratamentoTest {
 
     @Test
     void deveValidarCamposObrigatorios() {
-        // Cria Tratamento com todos os campos nulos ou vazios
-        Tratamento tratamento = new Tratamento();
+                Tratamento tratamento = new Tratamento();
 
         Set<ConstraintViolation<Tratamento>> violations = validator.validate(tratamento);
 
         assertFalse(violations.isEmpty());
 
-        // Verifica se as mensagens de erro esperadas aparecem
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("medicamentos") && v.getMessage().contains("obrigatórios")));
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("inicioTratamento") && v.getMessage().contains("obrigatória")));
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("fimTratamento") && v.getMessage().contains("obrigatória")));
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("periodicidade") && v.getMessage().contains("obrigatória")));
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("horarios") && v.getMessage().contains("obrigatórios")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("idPaciente")
+                && v.getMessage().contains("obrigatório")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("medicamentos")
+                && v.getMessage().contains("obrigatórios")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("inicioTratamento")
+                && v.getMessage().contains("obrigatória")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("fimTratamento")
+                && v.getMessage().contains("obrigatória")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("periodicidade")
+                && v.getMessage().contains("obrigatória")));
+        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("horarios")
+                && v.getMessage().contains("obrigatórios")));
     }
 
     @Test
@@ -96,6 +104,7 @@ class TratamentoTest {
                 .build();
 
         Tratamento tratamento = Tratamento.builder()
+                .idPaciente(999)
                 .medicamentos(List.of(medicacao))
                 .inicioTratamento(LocalDate.of(2025, 7, 1))
                 .fimTratamento(LocalDate.of(2025, 7, 10))

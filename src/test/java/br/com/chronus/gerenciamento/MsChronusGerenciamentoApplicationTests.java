@@ -1,4 +1,3 @@
-/*
 package br.com.chronus.gerenciamento;
 
 import org.junit.jupiter.api.Test;
@@ -12,4 +11,3 @@ class MsChronusGerenciamentoApplicationTests {
 	}
 
 }
-*/

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class ConsultaRequest {
 
-    @NotNull(message = "O ID da consulta é obrigatório")
+    /*@NotNull(message = "O ID da consulta é obrigatório")*/
     private Integer idConsulta;
 
     @NotNull(message = "O ID do paciente é obrigatório")

@@ -29,6 +29,9 @@ public class TratamentoEntity {
     )
     private List<MedicacaoEntity> medicamentos;
 
+    @Column(name = "id_paciente", nullable = false)
+    private Integer idPaciente;
+
     @Column(name = "inicio_tratamento", nullable = false)
     private LocalDate inicioTratamento;
 

@@ -49,4 +49,15 @@ public class TratamentoController {
         List<Tratamento> list = tratamentoGateway.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    @GetMapping("/paciente/{idPaciente}")
+    public ResponseEntity<List<Tratamento>> getTratamentosByPacienteId(@PathVariable Integer idPaciente) {
+        List<Tratamento> tratamentos = tratamentoGateway.findByPacienteId(idPaciente);
+        if (tratamentos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(tratamentos, HttpStatus.OK);
+    }
+
+
 }

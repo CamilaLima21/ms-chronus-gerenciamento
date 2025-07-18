@@ -61,5 +61,13 @@ public class TratamentoGatewayImpl implements TratamentoGateway {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Tratamento> findByPacienteId(final Integer idPaciente) {
+        return tratamentoRepository.findByIdPaciente(idPaciente)
+                .stream()
+                .map(tratamentoMapper::mapToDomain)
+                .collect(Collectors.toList());
+    }
+
 }
 

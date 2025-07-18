@@ -16,4 +16,7 @@ public interface TratamentoGateway {
     void delete(final Integer idTratamento);
 
     List<Tratamento> findAll();
+
+    List<Tratamento> findByPacienteId(final Integer idPaciente);
+
 }

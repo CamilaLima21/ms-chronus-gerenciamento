@@ -164,6 +164,22 @@ class TratamentoGatewayImplTest {
         assertEquals(tratamentoDomain.getIdTratamento(), result.get(0).getIdTratamento());
     }
 
+    @Test
+    void testFindByPacienteId() {
+        Integer idPaciente = 123;
+
+        when(tratamentoRepository.findByIdPaciente(idPaciente)).thenReturn(List.of(tratamentoEntity));
+        when(tratamentoMapper.mapToDomain(tratamentoEntity)).thenReturn(tratamentoDomain);
+
+        List<Tratamento> result = tratamentoGateway.findByPacienteId(idPaciente);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(tratamentoDomain.getIdTratamento(), result.get(0).getIdTratamento());
+
+        verify(tratamentoRepository).findByIdPaciente(idPaciente);
+    }
+
     @AfterEach
     void tearDown() throws Exception {
         closeable.close();

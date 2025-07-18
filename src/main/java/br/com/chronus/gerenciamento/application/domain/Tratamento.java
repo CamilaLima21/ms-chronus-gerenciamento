@@ -17,6 +17,9 @@ public class Tratamento {
 
     private Integer idTratamento;
 
+    @NotNull(message = "O ID do paciente é obrigatório")
+    private Integer idPaciente;
+
     @NotNull(message = "Os medicamentos são obrigatórios")
     private List<Medicacao> medicamentos;
 
@@ -35,12 +38,13 @@ public class Tratamento {
     private List<HorarioEnum> horarios;
 
     public static Tratamento createTratamento(
+            final Integer idPaciente,
             final List<Medicacao> medicamentos,
             final LocalDate inicioTratamento,
             final LocalDate fimTratamento,
             final String periodicidade,
             final String dosagem,
             final List<HorarioEnum> horarios) {
-        return new Tratamento(null, medicamentos, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
+        return new Tratamento(null, idPaciente, medicamentos, inicioTratamento, fimTratamento, periodicidade, dosagem, horarios);
     }
 }

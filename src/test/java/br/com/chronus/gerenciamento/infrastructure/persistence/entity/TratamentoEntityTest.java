@@ -1,10 +1,8 @@
 package br.com.chronus.gerenciamento.infrastructure.persistence.entity;
-
 import br.com.chronus.gerenciamento.application.enums.HorarioEnum;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,13 +28,13 @@ class TratamentoEntityTest {
                 .sigtapMedicacao("S456")
                 .build();
 
-        List<MedicacaoEntity> medicamentos = Arrays.asList(medic1, medic2);
+        List<MedicacaoEntity> medicamentos = List.of(medic1, medic2);
 
         LocalDate inicio = LocalDate.of(2025, 7, 1);
         LocalDate fim = LocalDate.of(2025, 7, 31);
         String periodicidade = "Diária";
         String dosagem = "2 comprimidos";
-        List<HorarioEnum> horarios = Arrays.asList(HorarioEnum.H08, HorarioEnum.H20);
+        List<HorarioEnum> horarios = List.of(HorarioEnum.H08, HorarioEnum.H20);
 
         TratamentoEntity tratamento = TratamentoEntity.builder()
                 .idTratamento(idTratamento)
@@ -49,11 +47,14 @@ class TratamentoEntityTest {
                 .build();
 
         assertThat(tratamento.getIdTratamento()).isEqualTo(idTratamento);
-        assertThat(tratamento.getMedicamentos()).hasSize(2).containsExactlyElementsOf(medicamentos);
+        assertThat(tratamento.getMedicamentos())
+                .hasSize(2)
+                .containsExactly(medic1, medic2);
         assertThat(tratamento.getInicioTratamento()).isEqualTo(inicio);
         assertThat(tratamento.getFimTratamento()).isEqualTo(fim);
         assertThat(tratamento.getPeriodicidade()).isEqualTo(periodicidade);
         assertThat(tratamento.getDosagem()).isEqualTo(dosagem);
-        assertThat(tratamento.getHorarios()).containsExactlyElementsOf(horarios);
+        assertThat(tratamento.getHorarios())
+                .containsExactly(HorarioEnum.H08, HorarioEnum.H20);
     }
 }
