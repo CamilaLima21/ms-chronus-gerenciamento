@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class ConsultaRequest {
     private Integer idProfissionalSaude;
 
     @NotNull(message = "A data do exame é obrigatória")
-    private LocalDate dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
 
     private String observacaoConsulta;
 

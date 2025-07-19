@@ -58,7 +58,7 @@ public class ConsultaGatewayImpl implements ConsultaGateway {
     public List<Consulta> findByDataConsulta(LocalDate data) {
         List<ConsultaEntity> entities = consultaRepository.findByDataConsulta(data);
         return entities.stream()
-                .map(mapper::toDomain)
+                .map(this::mapToDomain)
                 .collect(Collectors.toList());
     }
 

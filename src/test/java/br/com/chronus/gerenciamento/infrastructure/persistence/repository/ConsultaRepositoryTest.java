@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,7 @@ class ConsultaRepositoryTest {
         ConsultaEntity consulta = ConsultaEntity.builder()
                 .idPaciente(1)
                 .idProfissionalSaude(2)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .observacaoConsulta("Consulta teste")
                 .statusConsulta(EnumStatusConsulta.PENDENTE)
                 .tipoConsulta(EnumTipoConsulta.PRESENCIAL)

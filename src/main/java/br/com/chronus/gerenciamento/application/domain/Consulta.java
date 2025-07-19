@@ -2,9 +2,13 @@ package br.com.chronus.gerenciamento.application.domain;
 
 import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,7 +20,7 @@ public class Consulta {
     private Integer idConsulta;
     private Integer idPaciente;
     private Integer idProfissionalSaude;
-    private LocalDate dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
     private String observacaoConsulta;
     private EnumStatusConsulta statusConsulta;
     private EnumTipoConsulta tipoConsulta;
@@ -25,7 +29,7 @@ public class Consulta {
     public static Consulta createConsulta(
             final Integer idPaciente,
             final Integer idProfissionalSaude,
-            final LocalDate dataHoraConsulta,
+            final LocalDateTime dataHoraConsulta,
             final String observacaoConsulta,
             final EnumStatusConsulta statusConsulta,
             final EnumTipoConsulta tipoConsulta,

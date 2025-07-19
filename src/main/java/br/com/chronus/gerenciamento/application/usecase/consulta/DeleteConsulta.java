@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -13,7 +14,7 @@ public class DeleteConsulta {
 
     private final ConsultaGateway consultaGateway;
 
-    public void execute(final Integer idConsulta, final LocalDate dataHoraConsulta) {
+    public void execute(final Integer idConsulta, final LocalDateTime dataHoraConsulta) {
         final var consulta = consultaGateway.getConsultaById(idConsulta)
                 .orElseThrow(() -> new ConsultaNaoEncontradaException(idConsulta));
 

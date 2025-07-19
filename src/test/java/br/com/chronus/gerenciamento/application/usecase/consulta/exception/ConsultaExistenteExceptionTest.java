@@ -2,7 +2,7 @@ package br.com.chronus.gerenciamento.application.usecase.consulta.exception;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,7 +11,7 @@ class ConsultaExistenteExceptionTest {
     @Test
     void deveCriarExcecaoComMensagemCorreta() {
         Integer idConsulta = 123;
-        LocalDate dataHoraConsulta = LocalDate.of(2025, 7, 17);
+        LocalDateTime dataHoraConsulta = LocalDateTime.of(2025, 7, 17, 10, 30);
 
         ConsultaExistenteException exception = new ConsultaExistenteException(idConsulta, dataHoraConsulta);
 

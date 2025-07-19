@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,7 +32,7 @@ class DeleteConsultaTest {
     @Test
     void deveExcluirConsultaComSucesso() {
         Integer idConsulta = 1;
-        LocalDate dataConsulta = LocalDate.now();
+        LocalDateTime dataConsulta = LocalDateTime.now();
 
         Consulta consulta = Consulta.builder()
                 .idConsulta(idConsulta)
@@ -50,7 +50,7 @@ class DeleteConsultaTest {
     @Test
     void deveLancarExcecaoQuandoConsultaNaoEncontrada() {
         Integer idConsulta = 99;
-        LocalDate dataConsulta = LocalDate.now();
+        LocalDateTime dataConsulta = LocalDateTime.now();
 
         when(consultaGateway.getConsultaById(idConsulta)).thenReturn(Optional.empty());
 

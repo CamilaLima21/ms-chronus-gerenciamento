@@ -72,9 +72,9 @@ public class TratamentoGatewayImpl implements TratamentoGateway {
     }
 
     @Override
+    @Transactional
     public List<TratamentoEntity> findByPeriodoAndHorario(LocalDate data, HorarioEnum horario) {
-        return tratamentoRepository.findByInicioTratamentoLessThanEqualAndFimTratamentoGreaterThanEqualAndHorariosContaining(
-                data, data, horario);
+        return tratamentoRepository.buscarTratamentosAtivosNoHorario(data, horario);
     }
 
 }

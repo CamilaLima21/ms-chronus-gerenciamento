@@ -4,7 +4,7 @@ import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +16,7 @@ class ConsultaRequestTest {
         Integer idConsulta = 1;
         Integer idPaciente = 100;
         Integer idProfissionalSaude = 200;
-        LocalDate dataHoraConsulta = LocalDate.of(2025, 7, 17);
+        LocalDateTime dataHoraConsulta = LocalDateTime.of(2025, 7, 17, 10, 30);
         String observacao = "Consulta de rotina";
         EnumStatusConsulta status = EnumStatusConsulta.CONFIRMADA;
         EnumTipoConsulta tipo = EnumTipoConsulta.TELEMEDICINA;

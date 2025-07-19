@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +40,7 @@ class ConsultaControllerTest {
         ConsultaRequest request = new ConsultaRequest();
         request.setIdPaciente(1);
         request.setIdProfissionalSaude(2);
-        request.setDataHoraConsulta(LocalDate.now());
+        request.setDataHoraConsulta(LocalDateTime.now());
         request.setObservacaoConsulta("Consulta de rotina");
         request.setStatusConsulta(EnumStatusConsulta.PENDENTE);
         request.setTipoConsulta(EnumTipoConsulta.PRESENCIAL);
@@ -52,7 +52,7 @@ class ConsultaControllerTest {
         consulta.setIdConsulta(1);
         consulta.setIdPaciente(1);
         consulta.setIdProfissionalSaude(2);
-        consulta.setDataHoraConsulta(LocalDate.now());
+        consulta.setDataHoraConsulta(LocalDateTime.now());
         consulta.setObservacaoConsulta("Consulta de rotina");
         consulta.setStatusConsulta(EnumStatusConsulta.PENDENTE);
         consulta.setTipoConsulta(EnumTipoConsulta.PRESENCIAL);

@@ -4,7 +4,7 @@ import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -16,7 +16,7 @@ class ConsultaEntityTest {
         Integer idConsulta = 1;
         Integer idPaciente = 10;
         Integer idProfissional = 20;
-        LocalDate dataConsulta = LocalDate.of(2025, 7, 17);
+        LocalDateTime dataConsulta = LocalDateTime.of(2025, 7, 17, 10, 30);
         String observacao = "Consulta de rotina";
         EnumStatusConsulta status = EnumStatusConsulta.CONFIRMADA;
         EnumTipoConsulta tipo = EnumTipoConsulta.PRESENCIAL;
@@ -49,7 +49,7 @@ class ConsultaEntityTest {
         consulta.setIdConsulta(2);
         consulta.setIdPaciente(15);
         consulta.setIdProfissionalSaude(25);
-        consulta.setDataHoraConsulta(LocalDate.of(2025, 8, 1));
+        consulta.setDataHoraConsulta(LocalDateTime.of(2025, 7, 17, 10, 30));
         consulta.setObservacaoConsulta("Acompanhamento");
         consulta.setStatusConsulta(EnumStatusConsulta.PENDENTE);
         consulta.setTipoConsulta(EnumTipoConsulta.TELEMEDICINA);
@@ -58,7 +58,7 @@ class ConsultaEntityTest {
         assertEquals(2, consulta.getIdConsulta());
         assertEquals(15, consulta.getIdPaciente());
         assertEquals(25, consulta.getIdProfissionalSaude());
-        assertEquals(LocalDate.of(2025, 8, 1), consulta.getDataHoraConsulta());
+        assertEquals(LocalDateTime.of(2025, 7, 17, 10, 30), consulta.getDataHoraConsulta());
         assertEquals("Acompanhamento", consulta.getObservacaoConsulta());
         assertEquals(EnumStatusConsulta.PENDENTE, consulta.getStatusConsulta());
         assertEquals(EnumTipoConsulta.TELEMEDICINA, consulta.getTipoConsulta());

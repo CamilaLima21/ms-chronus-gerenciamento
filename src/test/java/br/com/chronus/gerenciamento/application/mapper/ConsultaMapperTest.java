@@ -6,7 +6,7 @@ import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,7 +20,7 @@ class ConsultaMapperTest {
         ConsultaRequest dto = new ConsultaRequest();
         dto.setIdPaciente(100);
         dto.setIdProfissionalSaude(200);
-        dto.setDataHoraConsulta(LocalDate.of(2025, 7, 17)); // Ajuste caso precise DateTime
+        dto.setDataHoraConsulta(LocalDateTime.of(2025, 7, 17, 10, 30)); // Ajuste caso precise DateTime
         dto.setObservacaoConsulta("Observação de teste");
         dto.setStatusConsulta(EnumStatusConsulta.CONFIRMADA);
         dto.setTipoConsulta(EnumTipoConsulta.PRESENCIAL);

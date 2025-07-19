@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +33,7 @@ class ConsultaGatewayImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        LocalDate data = LocalDate.of(2025, 7, 17);
+        LocalDateTime data = LocalDateTime.of(2025, 7, 17, 10, 30);
 
         consultaDomain = Consulta.builder()
                 .idConsulta(1)

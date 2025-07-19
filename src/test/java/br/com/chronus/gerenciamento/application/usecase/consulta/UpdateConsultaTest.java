@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -42,14 +42,14 @@ class UpdateConsultaTest {
         Consulta consultaExistente = Consulta.builder()
                 .idConsulta(idConsulta)
                 .idProfissionalSaude(10)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .statusConsulta(EnumStatusConsulta.PENDENTE)
                 .tipoConsulta(EnumTipoConsulta.TELEMEDICINA)
                 .build();
 
         ConsultaRequest updateRequest = new ConsultaRequest();
         updateRequest.setIdProfissionalSaude(20);
-        updateRequest.setDataHoraConsulta(LocalDate.now().plusDays(1));
+        updateRequest.setDataHoraConsulta(LocalDateTime.now().plusDays(1));
         updateRequest.setStatusConsulta(EnumStatusConsulta.CONFIRMADA);
         updateRequest.setTipoConsulta(EnumTipoConsulta.PRESENCIAL);
 
@@ -91,7 +91,7 @@ class UpdateConsultaTest {
         Consulta consultaExistente = Consulta.builder()
                 .idConsulta(idConsulta)
                 .idProfissionalSaude(10)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .statusConsulta(EnumStatusConsulta.PENDENTE)
                 .tipoConsulta(EnumTipoConsulta.TELEMEDICINA)
                 .build();
@@ -118,14 +118,14 @@ class UpdateConsultaTest {
         Consulta consultaExistente = Consulta.builder()
                 .idConsulta(idConsulta)
                 .idProfissionalSaude(10)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .statusConsulta(EnumStatusConsulta.PENDENTE)
                 .tipoConsulta(EnumTipoConsulta.TELEMEDICINA)
                 .build();
 
         ConsultaRequest updateRequest = new ConsultaRequest();
         updateRequest.setIdProfissionalSaude(null);  // profissional não informado
-        updateRequest.setDataHoraConsulta(LocalDate.now().plusDays(1));
+        updateRequest.setDataHoraConsulta(LocalDateTime.now().plusDays(1));
         updateRequest.setStatusConsulta(EnumStatusConsulta.CANCELADA);
         updateRequest.setTipoConsulta(EnumTipoConsulta.PRESENCIAL);
 

@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +45,7 @@ class CreateConsultaTest {
                 .idConsulta(null)  // nova consulta sem id
                 .idPaciente(1)
                 .idProfissionalSaude(2)
-                .dataHoraConsulta(LocalDate.now().plusDays(1))
+                .dataHoraConsulta(LocalDateTime.now().plusDays(1))
                 .observacaoConsulta("Observação")
                 .statusConsulta(null)
                 .tipoConsulta(null)
@@ -68,7 +69,7 @@ class CreateConsultaTest {
     void deveLancarExcecaoQuandoConsultaExistente() {
         Consulta request = Consulta.builder()
                 .idConsulta(100)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .build();
 
         when(consultaGateway.getConsultaById(100)).thenReturn(Optional.of(new Consulta()));
@@ -87,7 +88,7 @@ class CreateConsultaTest {
         Consulta request = Consulta.builder()
                 .idConsulta(null)
                 .idPaciente(10)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .build();
 
         when(consultaGateway.getConsultaById(anyInt())).thenReturn(Optional.empty());
@@ -108,7 +109,7 @@ class CreateConsultaTest {
                 .idConsulta(null)
                 .idPaciente(1)
                 .idProfissionalSaude(20)
-                .dataHoraConsulta(LocalDate.now())
+                .dataHoraConsulta(LocalDateTime.now())
                 .build();
 
         when(consultaGateway.getConsultaById(anyInt())).thenReturn(Optional.empty());

@@ -5,7 +5,7 @@ import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -18,7 +18,7 @@ class ConsultaTest {
 
         Integer idPaciente = 1;
         Integer idProfissionalSaude = 2;
-        LocalDate dataConsulta = LocalDate.of(2025, 7, 16);
+        LocalDateTime dataConsulta = LocalDateTime.of(2025, 7, 17, 10, 30);
         String observacao = "Paciente com dor lombar";
         EnumStatusConsulta status = EnumStatusConsulta.CONFIRMADA;
         EnumTipoConsulta tipo = EnumTipoConsulta.PRESENCIAL;
@@ -65,7 +65,7 @@ class ConsultaTest {
 
         Integer idPaciente = 10;
         Integer idProfissional = 20;
-        LocalDate data = LocalDate.now();
+        LocalDateTime data = LocalDateTime.now();
         String observacao = "Consulta cancelada pelo paciente";
         EnumStatusConsulta status = EnumStatusConsulta.CANCELADA;
         EnumTipoConsulta tipo = EnumTipoConsulta.TELEMEDICINA;
@@ -92,7 +92,7 @@ class ConsultaTest {
         Consulta consulta = Consulta.createConsulta(
                 3,
                 4,
-                LocalDate.of(2025, 8, 1),
+                LocalDateTime.of(2025, 7, 17, 10, 30),
                 "Aguardando confirmação",
                 EnumStatusConsulta.PENDENTE,
                 EnumTipoConsulta.PRESENCIAL,

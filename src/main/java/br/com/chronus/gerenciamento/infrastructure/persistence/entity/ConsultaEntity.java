@@ -3,10 +3,21 @@ package br.com.chronus.gerenciamento.infrastructure.persistence.entity;
 import br.com.chronus.gerenciamento.application.enums.EnumStatusConsulta;
 import br.com.chronus.gerenciamento.application.enums.EnumTipoConsulta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "consulta")
@@ -29,7 +40,7 @@ public class ConsultaEntity {
     private Integer idProfissionalSaude;
 
     @Column(name = "data_hora_consulta", nullable = false)
-    private LocalDate dataHoraConsulta;
+    private LocalDateTime dataHoraConsulta;
 
     @Column(name = "observacao_consulta")
     private String observacaoConsulta;
